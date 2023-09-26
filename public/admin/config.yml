@@ -114,4 +114,5 @@ collections:
             widget: "relation"
             collection: "multipleChoiceQuestions"
             searchFields: ["title"]
-            valueField: "title"
+            valueField: "{{slug}}"
+            displayFields: ["title"]
