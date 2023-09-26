@@ -13,6 +13,106 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime", date_format: "DD.MM.YYYY", time_format: "HH:mm", format: "LLL"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { label: "Title", name: "title", widget: "string" }
+      - {
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          date_format: "DD.MM.YYYY",
+          time_format: "HH:mm",
+          format: "LLL",
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: multipleChoiceQuestions
+    label: "Multiple Choice Question"
+    editor:
+      preview: false
+    folder: content/multipleChoiceQuestions
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Question Text"
+        name: "title"
+        widget: "string"
+        required: false
+      - widget: "select"
+        label: "Question type"
+        name: "questionType"
+        options: ["Map", "Regular"]
+      - widget: "object"
+        label: "Image"
+        name: "multipleChoiceQuestionImage"
+        required: false
+        fields:
+          - name: "multipleChoiceQuestionImageSrc"
+            label: "Image source"
+            widget: "image"
+            required: false
+          - name: "multipleChoiceQuestionImageCaption"
+            label: "Caption"
+            widget: "string"
+            required: false
+      - label: "Options"
+        name: "options"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Text"
+            name: "optionText"
+            widget: "string"
+            required: false
+          - label: "Latitude"
+            name: "latitude"
+            widget: "string"
+            required: false
+            hint: "e.g. -12.460443"
+          - label: "Longitude"
+            name: "longitude"
+            widget: "string"
+            required: false
+            hint: "e.g. 133.844517659562"
+          - label: "Correct"
+            name: "optionCorrect"
+            widget: "boolean"
+            required: false
+  - name: "quiz"
+    label: "Quiz"
+    delete: true
+    editor:
+      preview: false
+    folder: content/quiz
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        required: false
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        required: false
+      - widget: "object"
+        label: "Image"
+        name: "quizImage"
+        required: true
+        fields:
+          - name: "quizImageSrc"
+            label: "Image source"
+            widget: "image"
+            required: false
+          - name: "quizImageCaption"
+            label: "Caption"
+            widget: "string"
+            required: false
+      - label: "Multiple Choice Questions"
+        name: "multipleChoiceQuestions"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Multiple Choice Question"
+            name: "multipleChoiceQuestion"
+            widget: "relation"
+            collection: "multipleChoiceQuestions"
+            searchFields: ["title"]
+            valueField: "title"
