@@ -1,21 +1,51 @@
 import fs from "fs";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
 import matter from "gray-matter";
 import Head from "next/head";
 import styles from "../../styles/Blog.module.css";
 
 export default function Quiz({ frontmatter, markdown }) {
+  console.log("frontmatter", frontmatter);
+
   return (
     <div className={styles["container"]}>
       <Head>
         <title>Quiz | {frontmatter.title}</title>
       </Head>
       <h1 className={styles["title"]}>{frontmatter.title}</h1>
-      <span>{frontmatter.date}</span>
-      <hr />
-      <div className={styles["wrapper"]}>
-        <ReactMarkdown>{markdown}</ReactMarkdown>
-      </div>
+      <p>{frontmatter.description}</p>
+      {frontmatter.quizImage && (
+        <img
+          style={{ width: "100%" }}
+          src={frontmatter.quizImage.quizImageSrc}
+          alt={frontmatter.quizImage.quizImageAlt}
+        />
+      )}
+      <main className="quiz-page">
+        <div className="container">
+          {/* MAP QUESTIONS */}
+          {frontmatter.multipleChoiceQuestions &&
+            frontmatter.multipleChoiceQuestions.map((q, index) => {
+              //   const { question, options, name, questionType } = q
+              if (frontmatter.questionType === "Map") {
+                return (
+                  <div key={index}>
+                    <h3>fuckyea {q}</h3>
+                    {/* <Map
+                      options={options}
+                      selectedOptionIndex={answers[name]}
+                      onSelectOption={(optionIndex) => {
+                        onSelectMultipleChoiceOption(name, optionIndex)
+                      }}
+                    /> */}
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+        </div>
+      </main>
     </div>
   );
 }
@@ -26,6 +56,9 @@ export async function getStaticProps({ params: { slug } }) {
   );
   let frontmatter = fileContent.data;
   const markdown = fileContent.content;
+
+  // Get the questions in the quiz
+  const questions = frontmatter.multipleChoiceQuestions;
 
   return {
     props: { frontmatter, markdown },
