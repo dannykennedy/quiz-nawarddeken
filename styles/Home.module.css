@@ -8,25 +8,6 @@
   font-size: 3rem;
 }
 
-.subtitle {
-  margin-bottom: 2rem;
-}
-
-.quiz-list {
-  text-align: start;
-  margin: auto;
-  width: max-content;
-}
-
-.quiz-list li {
-  margin: 0.5rem 0;
-}
-
-.quiz-list a {
-  color: rgb(4, 165, 165);
-  text-decoration: underline;
-}
-
 .quiz-boxes {
   display: flex;
   flex-wrap: wrap;
@@ -42,6 +23,8 @@
   color: white;
   text-decoration: none;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .quiz-boxes a:visited {

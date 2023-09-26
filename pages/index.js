@@ -8,26 +8,14 @@ export default function Home({ quizzes }) {
   return (
     <div className={styles["container"]}>
       <Head>
-        <title>Demo quiz</title>
+        <title>Nawarddeken Quizzes</title>
       </Head>
-      <h1 className={styles["header"]}>Welcome to my quiz</h1>
-      <p className={styles["subtitle"]}>
-        This is a subtitle idk what to type here
-      </p>
-      <ul className={styles["quiz-list"]}>
-        {quizzes.map((quiz) => (
-          <li key={quiz.slug}>
-            <Link href={`/quiz/${quiz.slug}`}>
-              <a>{quiz.title}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <h1 className={styles["header"]}>Nawarddeken Quizzes</h1>
       <div className={styles["quiz-boxes"]}>
         {(quizzes || []).map((quiz, index) => {
           console.log("quiz", quiz);
           return (
-            <Link href={`/quiz/${quiz.slug}`}>
+            <Link href={`/quiz/${quiz.slug}`} key={index}>
               <div
                 className={styles["quiz-box"]}
                 style={{
