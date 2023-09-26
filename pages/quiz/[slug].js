@@ -4,8 +4,8 @@ import matter from "gray-matter";
 import Head from "next/head";
 import styles from "../../styles/Blog.module.css";
 
-export default function Quiz({ frontmatter, markdown }) {
-  console.log("frontmatter", frontmatter);
+export default function Quiz({ frontmatter, markdown, fullQuestions }) {
+  console.log("fullQuestions", fullQuestions);
 
   return (
     <div className={styles["container"]}>
@@ -59,9 +59,23 @@ export async function getStaticProps({ params: { slug } }) {
 
   // Get the questions in the quiz
   const questions = frontmatter.multipleChoiceQuestions;
+  let fullQuestions = {};
+
+  for (let i = 0; i < questions.length; i++) {
+    const element = questions[i];
+    let questionSlug = element["multipleChoiceQuestion"];
+    const fileContent = matter(
+      fs.readFileSync(
+        `./content/multipleChoiceQuestions/${questionSlug}.md`,
+        "utf8"
+      )
+    );
+    const frontmatter = fileContent.data;
+    fullQuestions[questionSlug] = frontmatter;
+  }
 
   return {
-    props: { frontmatter, markdown },
+    props: { frontmatter, markdown, fullQuestions },
   };
 }
 
