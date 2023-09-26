@@ -23,6 +23,23 @@ export default function Home({ quizzes }) {
           </li>
         ))}
       </ul>
+      <div className={styles["quiz-boxes"]}>
+        {(quizzes || []).map((quiz, index) => {
+          console.log("quiz", quiz);
+          return (
+            <Link href={`/quiz/${quiz.slug}`}>
+              <div
+                className={styles["quiz-box"]}
+                style={{
+                  backgroundImage: `url(${quiz.quizImage.quizImageSrc})`,
+                }}
+              >
+                <h2>{quiz.title}</h2>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

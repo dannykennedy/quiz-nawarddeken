@@ -26,3 +26,24 @@
   color: rgb(4, 165, 165);
   text-decoration: underline;
 }
+
+.quiz-boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.quiz-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 30%;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.quiz-boxes a:visited {
+  color: white;
+}
