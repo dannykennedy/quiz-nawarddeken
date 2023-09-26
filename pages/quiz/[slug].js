@@ -16,7 +16,7 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
       <p>{frontmatter.description}</p>
       {frontmatter.quizImage && (
         <img
-          style={{ width: "100%" }}
+          style={{ width: "200px" }}
           src={frontmatter.quizImage.quizImageSrc}
           alt={frontmatter.quizImage.quizImageAlt}
         />
@@ -26,11 +26,12 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
           {/* MAP QUESTIONS */}
           {frontmatter.multipleChoiceQuestions &&
             frontmatter.multipleChoiceQuestions.map((q, index) => {
+              const fullQuestion = fullQuestions[q.multipleChoiceQuestion];
               //   const { question, options, name, questionType } = q
-              if (frontmatter.questionType === "Map") {
+              if (fullQuestion.questionType === "Map") {
                 return (
                   <div key={index}>
-                    <h3>fuckyea {q}</h3>
+                    <h3>{fullQuestion.title}</h3>
                     {/* <Map
                       options={options}
                       selectedOptionIndex={answers[name]}
