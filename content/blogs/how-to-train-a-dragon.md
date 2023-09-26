@@ -5,8 +5,7 @@ date: August 5, 2021 1:24 PM
 
 # Seriously?
 
-There is no gain wasting time here go complete the tutorial.
-
+Eat shit and die. There is no gain wasting time here go complete the tutorial.
 
 > You still here ?
 
