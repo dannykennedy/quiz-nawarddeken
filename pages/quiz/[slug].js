@@ -3,6 +3,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import Head from "next/head";
 import styles from "../../styles/Blog.module.css";
+import { Map } from "../../components/Map";
 
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   console.log("fullQuestions", fullQuestions);
@@ -32,13 +33,13 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
                 return (
                   <div key={index}>
                     <h3>{fullQuestion.title}</h3>
-                    {/* <Map
-                      options={options}
-                      selectedOptionIndex={answers[name]}
-                      onSelectOption={(optionIndex) => {
-                        onSelectMultipleChoiceOption(name, optionIndex)
-                      }}
-                    /> */}
+                    <Map
+                      options={fullQuestion.options}
+                      //   selectedOptionIndex={answers[name]}
+                      //   onSelectOption={(optionIndex) => {
+                      //     onSelectMultipleChoiceOption(name, optionIndex)
+                      //   }}
+                    />
                   </div>
                 );
               } else {
