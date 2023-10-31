@@ -3,6 +3,7 @@ import matter from "gray-matter";
 import Link from "next/link";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { Header } from "../components/Header";
 
 export default function Home({ quizzes }) {
   return (
@@ -10,6 +11,7 @@ export default function Home({ quizzes }) {
       <Head>
         <title>Nawarddeken Quizzes</title>
       </Head>
+      <Header />
       <h1 className={styles["header"]}>Nawarddeken Quizzes</h1>
       <div className={styles["quiz-boxes"]}>
         {(quizzes || []).map((quiz, index) => {
