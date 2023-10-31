@@ -15,3 +15,7 @@ Learn how to built this from this [tutorial](https://siddharthroy.netlify.app/bl
 1. Clone this repo `git clone https://github.com/siddharthroy12/nextjs-blog-tutorial`
 2. Navigate to the directory and run `npm install` or `yarn add` to install the dependencies.
 3. run `npm run dev` or `yarn dev`
+
+## Dan's notes
+
+You need to use Node 16! 16.16 works fine.
