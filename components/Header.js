@@ -1,12 +1,34 @@
 import React from "react";
 import styles from "../styles/Main.module.css";
+import Image from "next/image";
+import Link from "next/link";
 
-// Just a basic fixed header at the top of the page
+const headerLinks = [
+  {
+    label: "Quizzes Home",
+    href: "/",
+  },
+  {
+    label: "Nawarddeken",
+    href: "https://www.nawarddeken.org.au/",
+  },
+];
 
 export const Header = () => {
   return (
     <header className={styles["header"]}>
-      <h1>Header</h1>
+      <Image src="/uploads/logo.jpg" height={150} width={172}></Image>
+      <div className={styles["header-right"]}>
+        <ul className={styles["header-links"]}>
+          {headerLinks.map((link) => {
+            return (
+              <li className={styles["header-links__item"]}>
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </header>
   );
 };

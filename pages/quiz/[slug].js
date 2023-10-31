@@ -2,52 +2,57 @@ import fs from "fs";
 // import ReactMarkdown from "react-markdown";
 import matter from "gray-matter";
 import Head from "next/head";
-import styles from "../../styles/Blog.module.css";
+import styles from "../../styles/Quiz.module.css";
+import mainStyles from "../../styles/Main.module.css";
 import { Map } from "../../components/Map";
+import { Header } from "../../components/Header";
 
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   console.log("fullQuestions", fullQuestions);
 
   return (
-    <div className={styles["container"]}>
+    <div className={mainStyles["page-wrapper"]}>
       <Head>
         <title>Quiz | {frontmatter.title}</title>
       </Head>
-      <h1 className={styles["title"]}>{frontmatter.title}</h1>
-      <p>{frontmatter.description}</p>
-      {frontmatter.quizImage && (
-        <img
-          style={{ width: "200px" }}
-          src={frontmatter.quizImage.quizImageSrc}
-          alt={frontmatter.quizImage.quizImageAlt}
-        />
-      )}
-      <main className="quiz-page">
-        <div className="container">
-          {/* MAP QUESTIONS */}
-          {frontmatter.multipleChoiceQuestions &&
-            frontmatter.multipleChoiceQuestions.map((q, index) => {
-              const fullQuestion = fullQuestions[q.multipleChoiceQuestion];
-              //   const { question, options, name, questionType } = q
-              if (fullQuestion.questionType === "Map") {
-                return (
-                  <div key={index}>
-                    <h3>{fullQuestion.title}</h3>
-                    <Map
-                      options={fullQuestion.options}
-                      //   selectedOptionIndex={answers[name]}
-                      //   onSelectOption={(optionIndex) => {
-                      //     onSelectMultipleChoiceOption(name, optionIndex)
-                      //   }}
-                    />
-                  </div>
-                );
-              } else {
-                return null;
-              }
-            })}
-        </div>
-      </main>
+      <Header />
+      <div className={mainStyles["content-wrapper"]}>
+        <h1 className={mainStyles["h1"]}>{frontmatter.title}</h1>
+        <p>{frontmatter.description}</p>
+        {frontmatter.quizImage && (
+          <img
+            style={{ width: "200px" }}
+            src={frontmatter.quizImage.quizImageSrc}
+            alt={frontmatter.quizImage.quizImageAlt}
+          />
+        )}
+        <main className="quiz-page">
+          <div className="container">
+            {/* MAP QUESTIONS */}
+            {frontmatter.multipleChoiceQuestions &&
+              frontmatter.multipleChoiceQuestions.map((q, index) => {
+                const fullQuestion = fullQuestions[q.multipleChoiceQuestion];
+                //   const { question, options, name, questionType } = q
+                if (fullQuestion.questionType === "Map") {
+                  return (
+                    <div key={index}>
+                      <h3>{fullQuestion.title}</h3>
+                      <Map
+                        options={fullQuestion.options}
+                        //   selectedOptionIndex={answers[name]}
+                        //   onSelectOption={(optionIndex) => {
+                        //     onSelectMultipleChoiceOption(name, optionIndex)
+                        //   }}
+                      />
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
