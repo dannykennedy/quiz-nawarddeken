@@ -20,9 +20,9 @@ export const Header = () => {
       <Image src="/uploads/logo.jpg" height={150} width={172}></Image>
       <div className={styles["header-right"]}>
         <ul className={styles["header-links"]}>
-          {headerLinks.map((link) => {
+          {headerLinks.map((link, i) => {
             return (
-              <li className={styles["header-links__item"]}>
+              <li className={styles["header-links__item"]} key={i}>
                 <Link href={link.href}>{link.label}</Link>
               </li>
             );

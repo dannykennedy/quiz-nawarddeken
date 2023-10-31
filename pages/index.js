@@ -18,10 +18,10 @@ export default function Home({ quizzes }) {
 
         <blockquote className={mainStyles["blockquote"]}>
           <span>
-            "We are teaching young people about the country, the walking routes,
-            the place names, experiences with the country and then they in turn
-            follow this way. This is not a new thing. It's just what our old
-            people before us taught us"
+            &quot;We are teaching young people about the country, the walking
+            routes, the place names, experiences with the country and then they
+            in turn follow this way. This is not a new thing. It's just what our
+            old people before us taught us&quot;
           </span>
           <span className={mainStyles["blockquote-source"]}>
             Professor Mary Kolkiwarra Nadjamerrek
