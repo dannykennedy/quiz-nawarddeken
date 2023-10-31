@@ -72,3 +72,23 @@ ul.header-links {
   font-style: normal;
   margin-top: 1rem;
 }
+
+.button {
+  background-color: #f0ba09;
+  color: black;
+  border: none;
+  border-radius: 0px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "futura-pt", sans-serif;
+  margin: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

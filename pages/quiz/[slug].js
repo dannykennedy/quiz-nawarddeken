@@ -11,6 +11,10 @@ import Image from "next/image";
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   console.log("fullQuestions", fullQuestions);
 
+  const onSubmitQuiz = () => {
+    console.log("onSubmitQuiz");
+  };
+
   return (
     <div className={mainStyles["page-wrapper"]}>
       <Head>
@@ -54,10 +58,10 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
                       <h3>{fullQuestion.title}</h3>
                       <Map
                         options={fullQuestion.options}
-                        //   selectedOptionIndex={answers[name]}
-                        //   onSelectOption={(optionIndex) => {
-                        //     onSelectMultipleChoiceOption(name, optionIndex)
-                        //   }}
+                        // selectedOptionIndex={answers[name]}
+                        onSelectOption={(optionIndex) => {
+                          console.log("selected option", optionIndex);
+                        }}
                       />
                     </div>
                   );
@@ -65,6 +69,12 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
                   return null;
                 }
               })}
+          </div>
+          {/* Submit quiz button */}
+          <div className={mainStyles["button-container"]}>
+            <button onClick={onSubmitQuiz} className={mainStyles["button"]}>
+              Submit Quiz
+            </button>
           </div>
         </main>
       </div>
