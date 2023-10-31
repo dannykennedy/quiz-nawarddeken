@@ -32,6 +32,7 @@ ul.header-links {
 
 .header-links__item {
   padding: 0 0.5rem;
+  color: #444455;
 }
 
 /* MAIN */
@@ -50,7 +51,7 @@ ul.header-links {
 
 /* HEADINGS */
 .h1 {
-  color: #444;
+  color: #444455;
   font-size: 3rem;
   margin-top: 0px;
   font-weight: 600;

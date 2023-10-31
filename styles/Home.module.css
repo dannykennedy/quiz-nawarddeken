@@ -10,6 +10,7 @@
 .quiz-boxes {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 4rem;
 }
 
 .quiz-box {
@@ -28,4 +29,16 @@
 
 .quiz-boxes a:visited {
   color: white;
+}
+
+@media screen and (max-width: 900px) {
+  .quiz-box {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .quiz-box {
+    width: 100%;
+  }
 }

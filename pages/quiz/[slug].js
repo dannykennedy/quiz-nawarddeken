@@ -6,6 +6,7 @@ import styles from "../../styles/Quiz.module.css";
 import mainStyles from "../../styles/Main.module.css";
 import { Map } from "../../components/Map";
 import { Header } from "../../components/Header";
+import Image from "next/image";
 
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   console.log("fullQuestions", fullQuestions);
@@ -16,17 +17,31 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
         <title>Quiz | {frontmatter.title}</title>
       </Head>
       <Header />
-      <div className={mainStyles["content-wrapper"]}>
-        <h1 className={mainStyles["h1"]}>{frontmatter.title}</h1>
-        <p>{frontmatter.description}</p>
-        {frontmatter.quizImage && (
-          <img
-            style={{ width: "200px" }}
+      {frontmatter.quizImage && (
+        <div style={{ width: "100%", height: 400, position: "relative" }}>
+          <Image
             src={frontmatter.quizImage.quizImageSrc}
             alt={frontmatter.quizImage.quizImageAlt}
+            layout="fill"
+            objectFit="cover"
           />
-        )}
-        <main className="quiz-page">
+          <h1
+            className={mainStyles["h1"]}
+            style={{
+              position: "absolute",
+              bottom: "2rem",
+              left: "3rem",
+              color: "rgba(255, 255, 255, 0.8)",
+              marginBottom: 0,
+            }}
+          >
+            {frontmatter.title}
+          </h1>
+        </div>
+      )}
+      <div className={mainStyles["content-wrapper"]}>
+        <p className={mainStyles["blockquote"]}>{frontmatter.description}</p>
+        <main className={styles["quiz-area"]}>
           <div className="container">
             {/* MAP QUESTIONS */}
             {frontmatter.multipleChoiceQuestions &&
