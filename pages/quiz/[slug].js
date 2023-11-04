@@ -65,7 +65,6 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
             {frontmatter.matchingQuestions &&
               frontmatter.matchingQuestions.map((q, index) => {
                 const fullQuestion = fullQuestions[q.matchingQuestion];
-                console.log("q", fullQuestion);
                 return <MatchingQuestion key={index} question={fullQuestion} />;
               })}
           </div>

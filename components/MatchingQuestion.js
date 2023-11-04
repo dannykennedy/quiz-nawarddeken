@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/MatchingQuestion.module.css";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Image from "next/image";
 
 const MatchingQuestionItem = ({ item, index }) => {
@@ -26,25 +27,69 @@ const MatchingQuestionItem = ({ item, index }) => {
 };
 
 export const MatchingQuestion = ({ question }) => {
+  const [sourceItems, setSourceItems] = useState(question.set1);
+  const [answerBoxes, setAnswerBoxes] = useState(
+    question.set2.map((x) => ({ ...x, sourceItems: [] }))
+  );
+
+  const onDragEnd = (result) => {
+    console.log("result", result);
+    if (!result.destination) return;
+    const items = Array.from(sourceItems);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setSourceItems(items);
+  };
+
   return (
     <div className={styles["matching-question"]}>
       <div>
         <h3>{question.title}</h3>
       </div>
-      <div className={styles["matching-question-options"]}>
-        <div className={styles["matching-question-set-1"]}>
-          {question.set1.map((item, index) => {
-            return <MatchingQuestionItem item={item} index={index} />;
-          })}
-        </div>
-        <div className={styles["matching-question-set-2"]}>
-          {question.set2.map((item, index) => {
+      <DragDropContext
+        onDragEnd={(result) => {
+          onDragEnd(result);
+        }}
+      >
+        <Droppable
+          droppableId={`droppable-questions`}
+          key={`droppable-questions`}
+        >
+          {(provided) => {
             return (
-              <MatchingQuestionItem item={item} index={index} key={index} />
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className={styles["matching-question-questions-box"]}
+              >
+                {sourceItems.map((item, index) => {
+                  return (
+                    <Draggable
+                      key={item.key}
+                      draggableId={item.key}
+                      index={index}
+                    >
+                      {(provided) => {
+                        return (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <MatchingQuestionItem item={item} index={index} />
+                          </div>
+                        );
+                      }}
+                    </Draggable>
+                  );
+                })}
+                {/* Makes the box bigger when dropping */}
+                {provided.placeholder}
+              </div>
             );
-          })}
-        </div>
-      </div>
+          }}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 };

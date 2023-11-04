@@ -5,11 +5,29 @@
 }
 
 .question-option {
-  background-color: #ccc;
-  padding: 1rem;
-  margin: 1rem;
-  width: 150px;
+  background-color: #f0ba09;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+}
+
+.question-option p {
+  margin: 5px 0px 2px 0px;
+}
+
+.matching-question-answer-box {
+  display: flex;
+  margin-top: 2rem;
+  background-color: #ccc;
+  padding: 1rem;
+}
+
+.matching-question-questions-box {
+  display: flex;
+  flex-direction: column;
+  background-color: bisque;
 }
