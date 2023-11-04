@@ -237,3 +237,15 @@ collections:
             searchFields: ["title"]
             valueField: "{{slug}}"
             displayFields: ["title"]
+      - label: "Matching Questions"
+        name: "matchingQuestions"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Matching Question"
+            name: "matchingQuestion"
+            widget: "relation"
+            collection: "matchingQuestions"
+            searchFields: ["title"]
+            valueField: "{{slug}}"
+            displayFields: ["title"]
