@@ -150,6 +150,11 @@ collections:
             searchFields: ["labelEnglish", "labelBininj"]
             valueField: "{{slug}}"
             displayFields: ["labelEnglish", "labelBininj"]
+          - label: "Item label"
+            name: "set1itemLabel"
+            widget: "string"
+            required: false
+            hint: "This is the label that will be displayed on the item in the quiz"
       - label: "Set 2"
         name: "set2"
         widget: "list"
@@ -162,6 +167,11 @@ collections:
             searchFields: ["labelEnglish", "labelBininj"]
             valueField: "{{slug}}"
             displayFields: ["labelEnglish", "labelBininj"]
+          - label: "Item label"
+            name: "set2itemLabel"
+            widget: "string"
+            required: false
+            hint: "This is the label that will be displayed on the item in the quiz"
       - label: "Matches"
         name: "matches"
         widget: "list"
