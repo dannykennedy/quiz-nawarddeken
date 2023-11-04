@@ -24,7 +24,6 @@ collections:
       - { label: "Body", name: "body", widget: "markdown" }
   - name: quizItems
     label: "Quiz Item"
-        label: "Multiple Choice Question"
     editor:
       preview: false
     folder: content/quizItems
