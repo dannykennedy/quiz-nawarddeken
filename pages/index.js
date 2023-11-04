@@ -39,7 +39,7 @@ export default function Home({ quizzes }) {
                     backgroundImage: `url(${quiz.quizImage.quizImageSrc})`,
                   }}
                 >
-                  <h2>{quiz.title}</h2>
+                  <h3 className={styles["quiz-boxes-title"]}>{quiz.title}</h3>
                 </div>
               </Link>
             );

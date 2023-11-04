@@ -29,6 +29,18 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
             layout="fill"
             objectFit="cover"
           />
+          {/* Overlay with shading, darker at the bottom */}
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%)",
+            }}
+          ></div>
           <h1
             className={mainStyles["h1"]}
             style={{
@@ -90,11 +102,11 @@ export async function getStaticProps({ params: { slug } }) {
   const markdown = fileContent.content;
 
   // Get the questions in the quiz
-  const questions = frontmatter.multipleChoiceQuestions;
+  const mcQuestions = frontmatter.multipleChoiceQuestions || [];
   let fullQuestions = {};
 
-  for (let i = 0; i < questions.length; i++) {
-    const element = questions[i];
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const element = mcQuestions[i];
     let questionSlug = element["multipleChoiceQuestion"];
     const fileContent = matter(
       fs.readFileSync(

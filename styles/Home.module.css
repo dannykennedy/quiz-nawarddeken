@@ -31,6 +31,18 @@
   color: white;
 }
 
+.quiz-boxes-title {
+  background-color: rgba(152, 56, 50, 0.8);
+  padding: 0.5rem 1rem;
+}
+
+.quiz-boxes-title:hover {
+  background-color: rgba(152, 56, 50, 1);
+  /* Grow slightly */
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
 @media screen and (max-width: 900px) {
   .quiz-box {
     width: 50%;
