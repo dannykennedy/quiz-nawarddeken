@@ -5,6 +5,7 @@ import Head from "next/head";
 import styles from "../../styles/Quiz.module.css";
 import mainStyles from "../../styles/Main.module.css";
 import { Map } from "../../components/Map";
+import { MatchingQuestion } from "../../components/MatchingQuestion";
 import { Header } from "../../components/Header";
 import Image from "next/image";
 
@@ -62,6 +63,13 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
                   return null;
                 }
               })}
+            {/* MATCHING QUESTIONS */}
+            {frontmatter.matchingQuestions &&
+              frontmatter.matchingQuestions.map((q, index) => {
+                const fullQuestion = fullQuestions[q.matchingQuestion];
+                console.log("q", fullQuestion);
+                return <MatchingQuestion key={index} question={fullQuestion} />;
+              })}
           </div>
           {/* Submit quiz button */}
           <div className={mainStyles["button-container"]}>
@@ -82,7 +90,7 @@ export async function getStaticProps({ params: { slug } }) {
   let frontmatter = fileContent.data;
   const markdown = fileContent.content;
 
-  // Get the questions in the quiz
+  // Get the multiple choice questions in the quiz (multipleChoiceQuestions)
   const mcQuestions = frontmatter.multipleChoiceQuestions || [];
   let fullQuestions = {};
 
@@ -96,7 +104,64 @@ export async function getStaticProps({ params: { slug } }) {
       )
     );
     const frontmatter = fileContent.data;
-    fullQuestions[questionSlug] = frontmatter;
+    fullQuestions[questionSlug] = {
+      ...frontmatter,
+      qType: "multipleChoiceQuestion",
+    };
+  }
+
+  // Get the matching questions in the quiz (matchingQuestions)
+  const matchingQuestions = frontmatter.matchingQuestions || [];
+
+  for (let i = 0; i < matchingQuestions.length; i++) {
+    const element = matchingQuestions[i];
+    let questionSlug = element["matchingQuestion"];
+    const fileContent = matter(
+      fs.readFileSync(`./content/matchingQuestions/${questionSlug}.md`, "utf8")
+    );
+    const frontmatter = fileContent.data;
+
+    // Expand the options in the matching question
+    // Expand Set 1 items
+    const set1Items = frontmatter.set1 || [];
+    const expandedSet1Items = [];
+    for (let j = 0; j < set1Items.length; j++) {
+      const set1Item = set1Items[j];
+      const key = set1Item["set1item"];
+      const set1ItemFileContent = matter(
+        fs.readFileSync(`./content/quizItems/${key}.md`, "utf8")
+      );
+      const set1ItemFrontmatter = set1ItemFileContent.data;
+      expandedSet1Items.push({
+        title: set1Item.title,
+        item: set1ItemFrontmatter,
+        key: key,
+      });
+    }
+
+    // Expand Set 2 items
+    const set2Items = frontmatter.set2 || [];
+    const expandedSet2Items = [];
+    for (let k = 0; k < set2Items.length; k++) {
+      const set2Item = set2Items[k];
+      const key = set2Item["set2item"];
+      const set2ItemFileContent = matter(
+        fs.readFileSync(`./content/quizItems/${key}.md`, "utf8")
+      );
+      const set2ItemFrontmatter = set2ItemFileContent.data;
+      expandedSet2Items.push({
+        title: set2Item.title,
+        item: set2ItemFrontmatter,
+        key: key,
+      });
+    }
+
+    fullQuestions[questionSlug] = {
+      ...frontmatter,
+      set1: expandedSet1Items,
+      set2: expandedSet2Items,
+      qType: "matchingQuestion",
+    };
   }
 
   return {
