@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const MatchingQuestionItem = ({ item, index }) => {
   return (
-    <div>
+    <div className={styles["question-option"]}>
       {item.item.quizItemImage && (
         <div
           style={{

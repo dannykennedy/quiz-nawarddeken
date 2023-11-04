@@ -32,9 +32,7 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
           />
           {/* Overlay with shading, darker at the bottom */}
           <div className={styles["quiz-image-overlay"]} />
-          <h1 className={`${mainStyles["h1"]} ${styles["quiz-title"]}`}>
-            {frontmatter.title}
-          </h1>
+          <h1 className={`${styles["quiz-title"]}`}>{frontmatter.title}</h1>
         </div>
       )}
       <div className={mainStyles["content-wrapper"]}>
