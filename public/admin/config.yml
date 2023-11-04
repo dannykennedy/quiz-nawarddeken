@@ -29,9 +29,10 @@ collections:
     folder: content/quizItems
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     create: true # Allow users to create new documents in this collection
+    summary: "{{fields.title}} / {{fields.labelBininj}}"
     fields:
       - label: "English name"
-        name: "labelEnglish"
+        name: "title"
         widget: "string"
         required: false
         hint: "e.g. Black Wallaroo"
@@ -142,16 +143,17 @@ collections:
         name: "set1"
         widget: "list"
         required: false
+        summary: "{{fields.title}}"
         fields:
           - label: "Set 1 item"
             name: "set1item"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["labelEnglish", "labelBininj"]
+            searchFields: ["title", "labelBininj"]
             valueField: "{{slug}}"
-            displayFields: ["labelEnglish", "labelBininj"]
+            displayFields: ["title", "labelBininj"]
           - label: "Item label"
-            name: "set1itemLabel"
+            name: "title"
             widget: "string"
             required: false
             hint: "This is the label that will be displayed on the item in the quiz"
@@ -159,16 +161,17 @@ collections:
         name: "set2"
         widget: "list"
         required: false
+        summary: "{{fields.title}}"
         fields:
           - label: "Set 2 item"
             name: "set2item"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["labelEnglish", "labelBininj"]
+            searchFields: ["title", "labelBininj"]
             valueField: "{{slug}}"
-            displayFields: ["labelEnglish", "labelBininj"]
+            displayFields: ["title", "labelBininj"]
           - label: "Item label"
-            name: "set2itemLabel"
+            name: "title"
             widget: "string"
             required: false
             hint: "This is the label that will be displayed on the item in the quiz"
@@ -176,21 +179,22 @@ collections:
         name: "matches"
         widget: "list"
         required: false
+        summary: "{{fields.title}}"
         fields:
           - label: "Item 1"
             name: "match1"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["labelEnglish", "labelBininj"]
+            searchFields: ["title", "labelBininj"]
             valueField: "{{slug}}"
-            displayFields: ["labelEnglish", "labelBininj"]
+            displayFields: ["title", "labelBininj"]
           - label: "Item 2"
             name: "match2"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["labelEnglish", "labelBininj"]
+            searchFields: ["title", "labelBininj"]
             valueField: "{{slug}}"
-            displayFields: ["labelEnglish", "labelBininj"]
+            displayFields: ["title", "labelBininj"]
   - name: "quiz"
     label: "Quiz"
     delete: true
