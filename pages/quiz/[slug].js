@@ -30,27 +30,8 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
             objectFit="cover"
           />
           {/* Overlay with shading, darker at the bottom */}
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              background:
-                "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%)",
-            }}
-          ></div>
-          <h1
-            className={mainStyles["h1"]}
-            style={{
-              position: "absolute",
-              bottom: "2rem",
-              left: "3rem",
-              color: "rgba(255, 255, 255, 0.8)",
-              marginBottom: 0,
-            }}
-          >
+          <div className={styles["quiz-image-overlay"]} />
+          <h1 className={`${mainStyles["h1"]} ${styles["quiz-title"]}`}>
             {frontmatter.title}
           </h1>
         </div>
