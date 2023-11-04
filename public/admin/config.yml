@@ -22,6 +22,55 @@ collections:
           format: "LLL",
         }
       - { label: "Body", name: "body", widget: "markdown" }
+  - name: quizItems
+    label: "Quiz Item"
+        label: "Multiple Choice Question"
+    editor:
+      preview: false
+    folder: content/quizItems
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    create: true # Allow users to create new documents in this collection
+    fields:
+      - label: "English name"
+        name: "labelEnglish"
+        widget: "string"
+        required: false
+        hint: "e.g. Black Wallaroo"
+      - label: "Kunwok name"
+        name: "labelBininj"
+        widget: "string"
+        required: false
+        hint: "e.g. Barrk"
+      - label: "Image"
+        name: "quizItemImage"
+        widget: "image"
+        required: false
+      - label: "Audio Kunwok"
+        name: "quizItemAudioKunwok"
+        widget: "file"
+        required: false
+      - name: "quizItemAudioKunwokTranscript"
+        label: "Audio Kunwok Transcript"
+        widget: "string"
+        required: false
+      - label: "Audio English"
+        name: "quizItemAudioEnglish"
+        widget: "file"
+        required: false
+      - name: "quizItemAudioEnglishTranscript"
+        label: "Audio English Transcript"
+        widget: "string"
+        required: false
+      - label: "Latitude"
+        name: "latitude"
+        widget: "string"
+        required: false
+        hint: "e.g. -12.460443"
+      - label: "Longitude"
+        name: "longitude"
+        widget: "string"
+        required: false
+        hint: "e.g. 133.844517659562"
   - name: multipleChoiceQuestions
     label: "Multiple Choice Question"
     editor:
@@ -74,6 +123,65 @@ collections:
             name: "optionCorrect"
             widget: "boolean"
             required: false
+  - name: matchingQuestions
+    label: "Matching Question"
+    editor:
+      preview: false
+    folder: content/matchingQuestions
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Question Text"
+        name: "title"
+        widget: "string"
+        required: false
+      - widget: "select"
+        label: "Question type"
+        name: "questionType"
+        options: ["Drag and Drop"]
+      - label: "Set 1"
+        name: "set1"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Set 1 item"
+            name: "set1item"
+            widget: "relation"
+            collection: "quizItems"
+            searchFields: ["labelEnglish", "labelBininj"]
+            valueField: "{{slug}}"
+            displayFields: ["labelEnglish", "labelBininj"]
+      - label: "Set 2"
+        name: "set2"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Set 2 item"
+            name: "set2item"
+            widget: "relation"
+            collection: "quizItems"
+            searchFields: ["labelEnglish", "labelBininj"]
+            valueField: "{{slug}}"
+            displayFields: ["labelEnglish", "labelBininj"]
+      - label: "Matches"
+        name: "matches"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Item 1"
+            name: "match1"
+            widget: "relation"
+            collection: "quizItems"
+            searchFields: ["labelEnglish", "labelBininj"]
+            valueField: "{{slug}}"
+            displayFields: ["labelEnglish", "labelBininj"]
+          - label: "Item 2"
+            name: "match2"
+            widget: "relation"
+            collection: "quizItems"
+            searchFields: ["labelEnglish", "labelBininj"]
+            valueField: "{{slug}}"
+            displayFields: ["labelEnglish", "labelBininj"]
   - name: "quiz"
     label: "Quiz"
     delete: true
