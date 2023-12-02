@@ -13,12 +13,12 @@ collections:
     folder: content/quizItems
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     create: true # Allow users to create new documents in this collection
-    summary: "{{fields.title}} / {{fields.labelBininj}}"
+    summary: "{{fields.title}}"
     fields:
       - label: "English name"
         name: "title"
         widget: "string"
-        required: false
+        required: true
         hint: "e.g. Black Wallaroo"
       - label: "Kunwok name"
         name: "labelBininj"
