@@ -1,6 +1,8 @@
 ---
 title: Match the thing with the season
 questionType: Drag and Drop
+set1title: Things
+set2title: Seasons
 set1:
   - set1item: spear-grass
     title: Spear grass starts growing
