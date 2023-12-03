@@ -2,7 +2,7 @@
 
 .header {
   height: 150px;
-  background-color: #f0ba09;
+  background-color: #c8ac99;
   width: 100%;
   top: 0px;
   display: flex;
@@ -38,7 +38,7 @@ ul.header-links {
 /* MAIN */
 .page-wrapper {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   min-height: 101vh;
@@ -74,7 +74,7 @@ ul.header-links {
 }
 
 .button {
-  background-color: #f0ba09;
+  background-color: #c8ac99;
   color: black;
   border: none;
   border-radius: 0px;

@@ -11,3 +11,16 @@ export const reorder = (keyList, itemKey, endIndex) => {
   keyListWithoutItem.splice(endIndex, 0, itemKey);
   return keyListWithoutItem;
 };
+
+// Adding an item to the box
+export const insert = (keyList, itemKey, endIndex) => {
+  const resultKeyList = [...keyList];
+  resultKeyList.splice(endIndex, 0, itemKey);
+  return resultKeyList;
+};
+
+// Remove an item from a box
+export const remove = (keyList, itemKey) => {
+  const resultKeyList = [...keyList];
+  return resultKeyList.filter((x) => x !== itemKey);
+};

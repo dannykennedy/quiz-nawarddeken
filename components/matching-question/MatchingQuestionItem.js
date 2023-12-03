@@ -9,7 +9,7 @@ export const MatchingQuestionItem = ({ item, index }) => {
         <div
           style={{
             width: 100,
-            height: 90,
+            height: 70,
             position: "relative",
           }}
         >

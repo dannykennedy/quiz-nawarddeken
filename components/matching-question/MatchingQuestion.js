@@ -3,9 +3,11 @@ import styles from "../../styles/MatchingQuestion.module.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MatchingQuestionItem } from "./MatchingQuestionItem";
 import { insert, remove, reorder } from "./drag-drop-functions";
+import PlayButton from "../PlayButton";
 
 export const MatchingQuestion = ({ question }) => {
   // STRUCTURE THE DATA
+  // Put all boxes together
   const sourceItems = question.set1.reduce((acc, item) => {
     acc[item.key] = item;
     return acc;
@@ -20,6 +22,7 @@ export const MatchingQuestion = ({ question }) => {
       id: `${item.key}`,
       title: item.title,
       itemKeys: [],
+      item: item.item,
     };
   });
   const allBoxes = [sourceBox, ...answerBoxes];
@@ -105,40 +108,61 @@ export const MatchingQuestion = ({ question }) => {
         <div className={styles["matching-question__container"]}>
           {boxes.map((box, index) => (
             <div key={box.id} className={styles["matching-question__box"]}>
-              <h3>{box.title}</h3>
-              <Droppable droppableId={box.id}>
-                {(provided, snapshot) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className={styles["matching-question__box__content"]}
-                  >
-                    {box.itemKeys.map((itemKey, index) => {
-                      const item = sourceItems[itemKey];
-                      return (
-                        <Draggable
-                          key={item.key}
-                          draggableId={item.key}
-                          index={index}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              className={
-                                styles["matching-question__box__content__item"]
-                              }
-                            >
-                              <MatchingQuestionItem item={item} />
-                            </div>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-                    {provided.placeholder}
-                  </div>
+              <h4>
+                {box.title}
+                {box.item && box.item.quizItemAudioKunwok && (
+                  <PlayButton audioTrack={box.item.quizItemAudioKunwok} />
                 )}
+              </h4>
+              <Droppable
+                droppableId={box.id}
+                className={styles["matching-question__droppable"]}
+              >
+                {(provided, snapshot) => {
+                  return (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className={styles["matching-question__box__content"]}
+                      // Background image of the item
+                      // Fit the image to the box
+                      style={{
+                        backgroundImage: box.item
+                          ? `url(../${box.item.quizItemImage})`
+                          : undefined,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                    >
+                      {box.itemKeys.map((itemKey, index) => {
+                        const item = sourceItems[itemKey];
+                        return (
+                          <Draggable
+                            key={item.key}
+                            draggableId={item.key}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                className={
+                                  styles[
+                                    "matching-question__box__content__item"
+                                  ]
+                                }
+                              >
+                                <MatchingQuestionItem item={item} />
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  );
+                }}
               </Droppable>
             </div>
           ))}
