@@ -23,19 +23,14 @@ const PlayButton = ({ audioTrack }) => {
   };
 
   return (
-    <button
+    <span
       style={{
-        display: "inline",
-        marginLeft: "0.25rem",
-        backgroundColor: "transparent",
-        border: "none",
         cursor: "pointer",
-        // borderRadius: "50%",
       }}
       onClick={handleButtonClick}
     >
-      {isPlaying ? "🎵" : "▶️"}
-    </button>
+      {isPlaying ? " 🎵" : " ▶️"}
+    </span>
   );
 };
 
