@@ -1,6 +1,8 @@
 ---
 title: Which things go in the truck?
 questionType: Drag and Drop
+set1title: Things
+set2title: Truck
 set1:
   - set1item: late-spear-grass
     title: speargrass
