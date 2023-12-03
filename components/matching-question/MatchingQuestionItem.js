@@ -9,7 +9,7 @@ export const MatchingQuestionItem = ({ item, index }) => {
         <div
           style={{
             width: 100,
-            height: 100,
+            height: 90,
             position: "relative",
           }}
         >
@@ -17,6 +17,7 @@ export const MatchingQuestionItem = ({ item, index }) => {
             src={item.item.quizItemImage}
             layout="fill"
             objectFit="cover"
+            alt={item.title}
           />
         </div>
       )}
