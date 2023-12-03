@@ -92,3 +92,10 @@ ul.header-links {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+.answers-area {
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  text-align: center;
+  font-size: 1.1rem;
+}

@@ -1,5 +1,5 @@
 import fs from "fs";
-// import ReactMarkdown from "react-markdown";
+import React, { useState } from "react";
 import matter from "gray-matter";
 import Head from "next/head";
 import styles from "../../styles/Quiz.module.css";
@@ -12,9 +12,13 @@ import Image from "next/image";
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   console.log("fullQuestions", fullQuestions);
 
+  const [answers, setAnswers] = useState({});
+
   const onSubmitQuiz = () => {
     console.log("onSubmitQuiz");
   };
+
+  const numMCQuestions = (frontmatter.multipleChoiceQuestions || []).length;
 
   return (
     <div className={mainStyles["page-wrapper"]}>
@@ -65,7 +69,13 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
             {frontmatter.matchingQuestions &&
               frontmatter.matchingQuestions.map((q, index) => {
                 const fullQuestion = fullQuestions[q.matchingQuestion];
-                return <MatchingQuestion key={index} question={fullQuestion} />;
+                return (
+                  <MatchingQuestion
+                    key={index}
+                    question={fullQuestion}
+                    questionNumber={index + numMCQuestions + 1}
+                  />
+                );
               })}
           </div>
           {/* Submit quiz button */}
@@ -104,6 +114,7 @@ export async function getStaticProps({ params: { slug } }) {
     fullQuestions[questionSlug] = {
       ...frontmatter,
       qType: "multipleChoiceQuestion",
+      id: questionSlug,
     };
   }
 
@@ -133,6 +144,7 @@ export async function getStaticProps({ params: { slug } }) {
         title: set1Item.title || set1ItemFrontmatter.title,
         item: set1ItemFrontmatter,
         key: key,
+        id: key,
       });
     }
 
@@ -158,6 +170,7 @@ export async function getStaticProps({ params: { slug } }) {
       set1: expandedSet1Items,
       set2: expandedSet2Items,
       qType: "matchingQuestion",
+      id: questionSlug,
     };
   }
 

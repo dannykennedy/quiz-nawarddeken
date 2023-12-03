@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styles from "../../styles/MatchingQuestion.module.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MatchingQuestionItem } from "./MatchingQuestionItem";
 import { insert, remove, reorder } from "./drag-drop-functions";
 import PlayButton from "../PlayButton";
+import mainStyles from "../../styles/Main.module.css";
+import { calculateCorrectMatches } from "./matching-functions";
 
-export const MatchingQuestion = ({ question }) => {
+export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
+  console.log("question", question);
   // STRUCTURE THE DATA
   // Put all boxes together
   const sourceItems = question.set1.reduce((acc, item) => {
@@ -29,6 +32,43 @@ export const MatchingQuestion = ({ question }) => {
 
   // STATE
   const [boxes, setBoxes] = useState(allBoxes);
+  const [showingAnswer, setShowingAnswer] = useState(false);
+
+  // MEMOIZED VALUES
+  const answer = useMemo(() => {
+    // Matches are in the form
+    // { "match1": "late-spear-grass", "match2": "late-wet-season" }
+    // Boxes are in the form
+    // {"id": "bangkerreng", "itemKeys": ["late-spear-grass"]}
+    const { matches } = question;
+
+    const answers = calculateCorrectMatches(boxes, matches);
+
+    const allCorrect = answers.incorrectItems.length === 0;
+
+    // If all answers are correct, return the correct answers
+    if (allCorrect) {
+      return {
+        correct: true,
+        message: "✅ Kamak yimarnbom!",
+      };
+    } else {
+      // Make a string that lists the incorrect matches
+      return {
+        correct: false,
+        message: "Try again!",
+      };
+    }
+  }, [boxes, question]);
+
+  // If the answer is correct, show the answer
+  useEffect(() => {
+    if (answer.correct) {
+      setShowingAnswer(true);
+    } else {
+      setShowingAnswer(false);
+    }
+  }, [answer]);
 
   const setNewBoxes = (newBoxes) => {
     setBoxes(newBoxes);
@@ -98,7 +138,10 @@ export const MatchingQuestion = ({ question }) => {
   return (
     <div className={styles["matching-question"]}>
       <div>
-        <h3>{question.title}</h3>
+        <h3>
+          <span>{`${questionNumber}) `}</span>
+          <span>{question.title}</span>
+        </h3>
       </div>
       <DragDropContext
         onDragEnd={(result) => {
@@ -168,6 +211,24 @@ export const MatchingQuestion = ({ question }) => {
           ))}
         </div>
       </DragDropContext>
+      <div className={mainStyles["answers-area"]}>
+        <button
+          className={mainStyles["button"]}
+          onClick={() => {
+            setShowingAnswer(!showingAnswer);
+          }}
+        >
+          Check answer
+        </button>
+        {
+          // If the user has checked the answer, show the answer
+          showingAnswer && (
+            <div className={styles["matching-question__answer"]}>
+              <p>{answer.message}</p>
+            </div>
+          )
+        }
+      </div>
     </div>
   );
 };

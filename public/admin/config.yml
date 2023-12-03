@@ -182,6 +182,7 @@ collections:
             searchFields: ["title", "labelBininj"]
             valueField: "{{slug}}"
             displayFields: ["title", "labelBininj"]
+            required: true
           - label: "Item 2"
             name: "match2"
             widget: "relation"
@@ -189,6 +190,7 @@ collections:
             searchFields: ["title", "labelBininj"]
             valueField: "{{slug}}"
             displayFields: ["title", "labelBininj"]
+            required: true
   - name: "quiz"
     label: "Quiz"
     delete: true
