@@ -10,7 +10,6 @@ set1:
     title: bangkerreng
 set2:
   - set2item: truck
-    title: truck
 matches:
   - match1: truck
     match2: late-spear-grass

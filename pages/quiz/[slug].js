@@ -130,7 +130,7 @@ export async function getStaticProps({ params: { slug } }) {
       );
       const set1ItemFrontmatter = set1ItemFileContent.data;
       expandedSet1Items.push({
-        title: set1Item.title,
+        title: set1Item.title || set1ItemFrontmatter.title,
         item: set1ItemFrontmatter,
         key: key,
       });
@@ -147,7 +147,7 @@ export async function getStaticProps({ params: { slug } }) {
       );
       const set2ItemFrontmatter = set2ItemFileContent.data;
       expandedSet2Items.push({
-        title: set2Item.title,
+        title: set2Item.title || set2ItemFrontmatter.title,
         item: set2ItemFrontmatter,
         key: key,
       });
