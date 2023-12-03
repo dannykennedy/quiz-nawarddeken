@@ -123,6 +123,16 @@ collections:
         label: "Question type"
         name: "questionType"
         options: ["Drag and Drop"]
+      - label: "Set 1 Title"
+        name: "set1title"
+        widget: "string"
+        required: false
+        hint: "e.g. Animals"
+      - label: "Set 2 Title"
+        name: "set2title"
+        widget: "string"
+        required: false
+        hint: "e.g. Seasons"
       - label: "Set 1"
         name: "set1"
         widget: "list"

@@ -5,7 +5,7 @@ import Head from "next/head";
 import styles from "../../styles/Quiz.module.css";
 import mainStyles from "../../styles/Main.module.css";
 import { Map } from "../../components/Map";
-import { MatchingQuestion } from "../../components/MatchingQuestion";
+import { MatchingQuestion } from "../../components/matching-question/MatchingQuestion";
 import { Header } from "../../components/Header";
 import Image from "next/image";
 
