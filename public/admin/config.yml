@@ -127,7 +127,7 @@ collections:
         name: "set1"
         widget: "list"
         required: false
-        summary: "{{fields.title}}"
+        summary: "{{fields.set1item}}"
         fields:
           - label: "Set 1 item"
             name: "set1item"
