@@ -19,17 +19,17 @@ collections:
         name: "title"
         widget: "string"
         required: true
-        hint: "e.g. Black Wallaroo"
+        hint: "e.g. Cheeky Yam"
       - label: "Kundedjnjenghmi name"
         name: "labelKundedjnjenghmi"
         widget: "string"
         required: false
-        hint: "e.g. Ngalkunburriyaymi"
+        hint: "e.g. Anyawok"
       - label: "Kunwinjku name"
         name: "labelKunwinjku"
         widget: "string"
         required: false
-        hint: "e.g. Yawkyawk"
+        hint: "e.g. Mankinjdjek"
       - label: "Scientific name"
         name: "labelScientific"
         widget: "string"
