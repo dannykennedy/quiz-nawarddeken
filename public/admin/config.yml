@@ -212,8 +212,16 @@ collections:
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
-      - label: "Title"
+      - label: "English Title"
         name: "title"
+        widget: "string"
+        required: false
+      - label: "Kundedjnjenghmi Title"
+        name: "labelKundedjnjenghmi"
+        widget: "string"
+        required: false
+      - label: "Kunwinjku Title"
+        name: "labelKunwinjku"
         widget: "string"
         required: false
       - label: "Description"
