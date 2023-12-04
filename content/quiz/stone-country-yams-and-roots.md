@@ -5,4 +5,5 @@ quizImage:
   quizImageSrc: /uploads/stone_country-yams.jpg
 matchingQuestions:
   - matchingQuestion: match-the-yam-with-the-season
+  - matchingQuestion: match-the-yam-with-the-season-1
 ---
