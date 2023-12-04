@@ -25,3 +25,9 @@
   margin-top: 0px;
   font-weight: 600;
 }
+
+.quiz-summary {
+  text-align: center;
+  color: #983832;
+  font-weight: bold;
+}

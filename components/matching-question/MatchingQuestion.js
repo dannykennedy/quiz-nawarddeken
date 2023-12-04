@@ -68,6 +68,7 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
     } else {
       setShowingAnswer(false);
     }
+    onAnswer(answer);
   }, [answer]);
 
   const setNewBoxes = (newBoxes) => {

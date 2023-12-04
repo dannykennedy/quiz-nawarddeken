@@ -1,5 +1,5 @@
 import fs from "fs";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import matter from "gray-matter";
 import Head from "next/head";
 import styles from "../../styles/Quiz.module.css";
@@ -12,10 +12,40 @@ import Image from "next/image";
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   console.log("fullQuestions", fullQuestions);
 
+  // Get the number of questions in the quiz
+  const numQuestions = Object.keys(fullQuestions || {}).length;
+
+  // STATE
   const [answers, setAnswers] = useState({});
+  const [showingQuizSummary, setShowingQuizSummary] = useState(false);
+  const [quizSummary, setQuizSummary] = useState({
+    numCorrect: 0,
+    numQuestions: numQuestions,
+    allCorrect: false,
+    message: "Try again!",
+  });
+
+  useEffect(() => {
+    console.log("answers", answers);
+  }, [answers]);
 
   const onSubmitQuiz = () => {
-    console.log("onSubmitQuiz");
+    const numCorrect = Object.values(answers).filter((x) => x.correct).length;
+    const allCorrect = numCorrect === numQuestions;
+    const message = allCorrect ? "✅ Kamak yimarnbom!" : "Try again!";
+    setQuizSummary({
+      numCorrect,
+      numQuestions,
+      allCorrect,
+      message,
+    });
+    setShowingQuizSummary(true);
+  };
+
+  // When the answers change, hide the quiz summary
+  const onSetAnswers = (answers) => {
+    setAnswers(answers);
+    setShowingQuizSummary(false);
   };
 
   const numMCQuestions = (frontmatter.multipleChoiceQuestions || []).length;
@@ -74,6 +104,12 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
                     key={index}
                     question={fullQuestion}
                     questionNumber={index + numMCQuestions + 1}
+                    onAnswer={(answer) => {
+                      onSetAnswers({
+                        ...answers,
+                        [fullQuestion.id]: answer,
+                      });
+                    }}
                   />
                 );
               })}
@@ -81,9 +117,20 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
           {/* Submit quiz button */}
           <div className={mainStyles["button-container"]}>
             <button onClick={onSubmitQuiz} className={mainStyles["button"]}>
-              Submit Quiz
+              Check quiz results
             </button>
           </div>
+          {
+            // If the user has checked the answer, show the answer
+            showingQuizSummary && (
+              <div className={styles["quiz-summary"]}>
+                <span>
+                  {quizSummary.numCorrect} / {quizSummary.numQuestions} correct.
+                </span>
+                <span>{" " + quizSummary.message}</span>
+              </div>
+            )
+          }
         </main>
       </div>
     </div>
