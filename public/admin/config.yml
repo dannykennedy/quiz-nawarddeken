@@ -134,7 +134,7 @@ collections:
       - widget: "select"
         label: "Question type"
         name: "questionType"
-        options: ["Drag and Drop"]
+        options: ["Drag and Drop", "Map"]
       - label: "Set 1 Title"
         name: "set1title"
         widget: "string"
