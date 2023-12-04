@@ -20,30 +20,41 @@ collections:
         widget: "string"
         required: true
         hint: "e.g. Black Wallaroo"
-      - label: "Kunwok name"
-        name: "labelBininj"
+      - label: "Kundedjnjenghmi name"
+        name: "labelKundedjnjenghmi"
         widget: "string"
         required: false
-        hint: "e.g. Barrk"
+        hint: "e.g. Ngalkunburriyaymi"
+      - label: "Kunwinjku name"
+        name: "labelKunwinjku"
+        widget: "string"
+        required: false
+        hint: "e.g. Yawkyawk"
+      - label: "Scientific name"
+        name: "labelScientific"
+        widget: "string"
+        required: false
+        hint: "e.g. Dioscorea bulbifera"
       - label: "Image"
         name: "quizItemImage"
         widget: "image"
         required: false
-      - label: "Audio Kunwok"
-        name: "quizItemAudioKunwok"
+      - label: "Short description"
+        name: "quizItemShortDescription"
+        widget: "string"
+        required: false
+        hint: "e.g. Kundjewk runs from around January to mid-March"
+      - label: "Audio Kunwinjku"
+        name: "quizItemAudioKunwinjku"
         widget: "file"
         required: false
-      - name: "quizItemAudioKunwokTranscript"
-        label: "Audio Kunwok Transcript"
-        widget: "string"
+      - label: "Audio Kundedjnjenghmi"
+        name: "quizItemAudioKundedjnjenghmi"
+        widget: "file"
         required: false
       - label: "Audio English"
         name: "quizItemAudioEnglish"
         widget: "file"
-        required: false
-      - name: "quizItemAudioEnglishTranscript"
-        label: "Audio English Transcript"
-        widget: "string"
         required: false
       - label: "Latitude"
         name: "latitude"
