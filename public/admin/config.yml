@@ -39,6 +39,7 @@ collections:
         name: "quizItemImage"
         widget: "image"
         required: false
+        hint: "For best results, use a square image"
       - label: "Short description"
         name: "quizItemShortDescription"
         widget: "string"
