@@ -6,9 +6,13 @@ import { insert, remove, reorder } from "./drag-drop-functions";
 import PlayButton from "../PlayButton";
 import mainStyles from "../../styles/Main.module.css";
 import { calculateCorrectMatches } from "./matching-functions";
+import { MatchingMap } from "../MatchingMap";
 
 export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
   console.log("question", question);
+
+  const isMapQuestion = question.questionType === "Map";
+
   // STRUCTURE THE DATA
   // Put all boxes together
   const sourceItems = question.set1.reduce((acc, item) => {
@@ -138,12 +142,21 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
 
   return (
     <div className={styles["matching-question"]}>
-      <div>
-        <h3>
-          <span>{`${questionNumber}) `}</span>
-          <span>{question.title}</span>
-        </h3>
-      </div>
+      <h3>
+        <span>{`${questionNumber}) `}</span>
+        <span>{question.title}</span>
+      </h3>
+      {isMapQuestion && (
+        <MatchingMap
+          options={question.set2.map((item, index) => {
+            return {
+              ...item,
+              latitude: item.item.latitude,
+              longitude: item.item.longitude,
+            };
+          })}
+        />
+      )}
       <DragDropContext
         onDragEnd={(result) => {
           onDragEnd(result);
@@ -171,9 +184,10 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
                       // Background image of the item
                       // Fit the image to the box
                       style={{
-                        backgroundImage: box.item
-                          ? `url(../${box.item.quizItemImage})`
-                          : undefined,
+                        backgroundImage:
+                          box.item && !isMapQuestion
+                            ? `url(../${box.item.quizItemImage})`
+                            : undefined,
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                       }}
