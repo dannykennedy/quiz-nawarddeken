@@ -11,7 +11,7 @@ import Image from "next/image";
 import { MultipleChoiceQuestion } from "../../components/MultipleChoiceQuestion";
 
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
-  console.log("fullQuestions", fullQuestions);
+  // console.log("fullQuestions", fullQuestions);
 
   // Get the number of questions in the quiz
   const numQuestions = Object.keys(fullQuestions || {}).length;

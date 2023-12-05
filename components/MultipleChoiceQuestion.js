@@ -10,12 +10,24 @@ export const MultipleChoiceQuestion = ({
   questionNumber,
   onAnswer,
 }) => {
-  const [checkedValues, setCheckedValues] = useState([]);
+  const options = question.options || [];
+  const defaultCheckedValues = options.map((x) => false);
+  const [checkedValues, setCheckedValues] = useState(options.map((x) => false));
   const [showingAnswer, setShowingAnswer] = useState(false);
   const [answer, setAnswer] = useState({
     correct: false,
     message: "Try again!",
   });
+
+  // Set checked based on index
+  const setChecked = (index) => {
+    // Uncheck all values
+    // Then check the right one
+    const newCheckedValues = [...defaultCheckedValues].map((_, i) => {
+      return i === index;
+    });
+    setCheckedValues(newCheckedValues);
+  };
 
   return (
     <div className={styles["mc-question"]}>
@@ -30,9 +42,10 @@ export const MultipleChoiceQuestion = ({
                 name={question.id}
                 id={option.optionText}
                 value={option.optionText}
-                checked={checkedValues.includes(option.optionText)}
+                checked={checkedValues[index]}
                 onChange={(e) => {
-                  setCheckedValues([e.target.value]);
+                  // Set the checked value
+                  setChecked(index);
                   // Hide the answer
                   setShowingAnswer(false);
                   // Check if the answer is correct
