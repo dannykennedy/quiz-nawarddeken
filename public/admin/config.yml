@@ -105,6 +105,10 @@ collections:
             name: "optionText"
             widget: "string"
             required: false
+          - name: "optionImage"
+            label: "Option image"
+            widget: "image"
+            required: false
           - label: "Latitude"
             name: "latitude"
             widget: "string"

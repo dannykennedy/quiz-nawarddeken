@@ -1,16 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/MultipleChoiceQuestion.module.css";
+import mainStyles from "../styles/Main.module.css";
 
+// question.options is in the form
+// [{optionText: 'Dioscorea transversa', optionCorrect: true}]
 export const MultipleChoiceQuestion = ({
   question,
   questionNumber,
   onAnswer,
 }) => {
-  console.log("question", question);
+  const [checkedValues, setCheckedValues] = useState([]);
+  const [showingAnswer, setShowingAnswer] = useState(false);
+  const [answer, setAnswer] = useState({
+    correct: false,
+    message: "Try again!",
+  });
 
   return (
     <div className={styles["matching-question"]}>
       <h3>{`${questionNumber}) ${question.title}`}</h3>
+      {/* List with check boxes for the options */}
+      <ul className={styles["matching-question__options"]}>
+        {question.options.map((option, index) => {
+          return (
+            <li key={index}>
+              <input
+                type="radio"
+                name={question.id}
+                id={option.optionText}
+                value={option.optionText}
+                checked={checkedValues.includes(option.optionText)}
+                onChange={(e) => {
+                  setCheckedValues([e.target.value]);
+                  // Hide the answer
+                  setShowingAnswer(false);
+                  // Check if the answer is correct
+                  const isCorrect = option.optionCorrect;
+                  // Call the onAnswer callback
+                  const answer = {
+                    correct: isCorrect,
+                    message: isCorrect ? "✅ Kamak yimarnbom!" : "Try again!",
+                  };
+                  onAnswer(answer);
+                  setAnswer(answer);
+                }}
+              />
+              <label
+                className={styles["matching-question__option-label"]}
+                htmlFor={option.optionText}
+              >
+                {option.optionText}
+              </label>
+            </li>
+          );
+        })}
+      </ul>
+      <div className={mainStyles["answers-area"]}>
+        <button
+          className={mainStyles["button"]}
+          onClick={() => {
+            setShowingAnswer(!showingAnswer);
+          }}
+        >
+          Check answer
+        </button>
+        {
+          // If the user has checked the answer, show the answer
+          showingAnswer && (
+            <div className={styles["matching-question__answer"]}>
+              <p>{answer.message}</p>
+            </div>
+          )
+        }
+      </div>
     </div>
   );
 };

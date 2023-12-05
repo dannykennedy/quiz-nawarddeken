@@ -1,0 +1,12 @@
+.matching-question__options {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.matching-question__option-label {
+  font-size: 1.1rem;
+}
+
+.matching-question__options li {
+  margin-bottom: 1rem;
+}

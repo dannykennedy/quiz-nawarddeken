@@ -9,8 +9,6 @@ import { calculateCorrectMatches } from "./matching-functions";
 import { MatchingMap } from "../MatchingMap";
 
 export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
-  console.log("question", question);
-
   const isMapQuestion = question.questionType === "Map";
 
   // STRUCTURE THE DATA
