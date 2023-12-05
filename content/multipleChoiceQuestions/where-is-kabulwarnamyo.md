@@ -9,8 +9,8 @@ options:
     longitude: "133.657742452717"
     optionCorrect: true
   - optionText: Mamardawerre
-    latitude: "-12.25722745"
-    longitude: "133.657742452717"
+    latitude: "-12.256681"
+    longitude: "133.656129"
   - optionText: Manmoyi
     latitude: "-12.5407963"
     longitude: "134.109968181643"
