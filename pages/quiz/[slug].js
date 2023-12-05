@@ -8,6 +8,7 @@ import { Map } from "../../components/Map";
 import { MatchingQuestion } from "../../components/matching-question/MatchingQuestion";
 import { Header } from "../../components/Header";
 import Image from "next/image";
+import { MultipleChoiceQuestion } from "../../components/MultipleChoiceQuestion";
 
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   console.log("fullQuestions", fullQuestions);
@@ -92,7 +93,19 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
                     </div>
                   );
                 } else {
-                  return null;
+                  return (
+                    <MultipleChoiceQuestion
+                      key={index}
+                      question={fullQuestion}
+                      questionNumber={index + 1}
+                      onAnswer={(answer) => {
+                        onSetAnswers({
+                          ...answers,
+                          [fullQuestion.id]: answer,
+                        });
+                      }}
+                    />
+                  );
                 }
               })}
             {/* MATCHING QUESTIONS */}
