@@ -167,6 +167,7 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
               <div
                 style={{
                   minHeight: 50,
+                  marginBottom: 16,
                 }}
               >
                 <ItemDetails

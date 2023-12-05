@@ -12,7 +12,7 @@
   background-color: #c8ac99;
   padding: 5px;
   margin: 5px;
-  width: 206px;
+  width: 236px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -61,15 +61,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 230px;
+  min-height: 230px;
   padding: 0.5rem;
 }
 
 .matching-question__box__content {
   background-color: rgba(152, 56, 50, 1);
   width: 100%;
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 230px;
+  min-height: 230px;
   border-radius: 8px;
 }
