@@ -4,8 +4,8 @@ questionType: Regular
 multipleChoiceQuestionImage:
   multipleChoiceQuestionImageSrc: /uploads/longyam.jpeg
 options:
-  - optionText: Dioscorea transversa
+  - title: Dioscorea transversa
     optionCorrect: true
-  - optionText: Vigna vexillata
-  - optionText: Amorphophallus paeoniifolius
+  - title: Vigna vexillata
+  - title: Amorphophallus paeoniifolius
 ---

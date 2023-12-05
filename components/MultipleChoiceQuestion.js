@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import styles from "../styles/MultipleChoiceQuestion.module.css";
 import mainStyles from "../styles/Main.module.css";
 import Image from "next/image";
+import { QuestionTitle } from "./QuestionTitle";
+import { MatchingMap } from "./MapIllustration";
 
 // question.options is in the form
-// [{optionText: 'Dioscorea transversa', optionImage: 'x.jpg', optionCorrect: true}]
+// [{title: 'Dioscorea transversa', optionImage: 'x.jpg', optionCorrect: true}]
 export const MultipleChoiceQuestion = ({
   question,
   questionNumber,
   onAnswer,
 }) => {
+  const { questionType } = question;
+
   const options = question.options || [];
   const defaultCheckedValues = options.map((x) => false);
   const [checkedValues, setCheckedValues] = useState(options.map((x) => false));
@@ -18,6 +22,8 @@ export const MultipleChoiceQuestion = ({
     correct: false,
     message: "Try again!",
   });
+
+  console.log("MultipleChoiceQuestion", question);
 
   // Set checked based on index
   const setChecked = (index) => {
@@ -31,7 +37,12 @@ export const MultipleChoiceQuestion = ({
 
   return (
     <div className={styles["mc-question"]}>
-      <h3>{`${questionNumber}) ${question.title}`}</h3>
+      <QuestionTitle questionNumber={questionNumber} title={question.title} />
+      {questionType === "Map" && (
+        <div className={styles["mc-question__map"]}>
+          <MatchingMap options={question.options} />
+        </div>
+      )}
       {/* List with check boxes for the options */}
       <ul className={styles["mc-question__options"]}>
         {question.options.map((option, index) => {
@@ -40,8 +51,8 @@ export const MultipleChoiceQuestion = ({
               <input
                 type="radio"
                 name={question.id}
-                id={option.optionText}
-                value={option.optionText}
+                id={option.title}
+                value={option.title}
                 checked={checkedValues[index]}
                 onChange={(e) => {
                   // Set the checked value
@@ -61,16 +72,16 @@ export const MultipleChoiceQuestion = ({
               />
               <label
                 className={styles["mc-question__option-label"]}
-                htmlFor={option.optionText}
+                htmlFor={option.title}
               >
-                {option.optionText}
+                {option.title}
               </label>
               {/* Image if there is one */}
               {option.optionImage && (
                 <div className={styles["mc-question__option-image"]}>
                   <Image
                     src={option.optionImage}
-                    alt={option.optionText || option.optionImage}
+                    alt={option.title || option.optionImage}
                     height={100}
                     width={100}
                   />

@@ -102,7 +102,7 @@ collections:
         required: false
         fields:
           - label: "Text"
-            name: "optionText"
+            name: "title"
             widget: "string"
             required: false
           - name: "optionImage"

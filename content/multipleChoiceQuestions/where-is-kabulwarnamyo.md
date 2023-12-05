@@ -4,14 +4,14 @@ questionType: Map
 multipleChoiceQuestionImage:
   multipleChoiceQuestionImageSrc: /uploads/mary.jpeg
 options:
-  - optionText: Kabulwarnamyo
+  - title: Kabulwarnamyo
     latitude: "-12.76378645"
     longitude: "133.657742452717"
     optionCorrect: true
-  - optionText: Mamardawerre
+  - title: Mamardawerre
     latitude: "-12.256681"
     longitude: "133.656129"
-  - optionText: Manmoyi
+  - title: Manmoyi
     latitude: "-12.5407963"
     longitude: "134.109968181643"
 ---

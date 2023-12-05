@@ -21,7 +21,7 @@ console.log(
 // latitude:"-12.76378645",
 // longitude:"133.844517659562",
 // optionCorrect:true,
-// optionText:"Kabulwarnamyo",
+// title:"Kabulwarnamyo",
 // }
 
 export const Map = ({ options, selectedOptionIndex, onSelectOption }) => {

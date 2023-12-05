@@ -5,9 +5,10 @@ import { MatchingQuestionItem } from "./MatchingQuestionItem";
 import { insert, remove, reorder } from "./drag-drop-functions";
 import mainStyles from "../../styles/Main.module.css";
 import { calculateCorrectMatches } from "./matching-functions";
-import { MatchingMap } from "../MatchingMap";
+import { MatchingMap } from "../MapIllustration";
 import { ItemDetails } from "./ItemDetails";
 import { log } from "@deck.gl/core";
+import { QuestionTitle } from "../QuestionTitle";
 
 export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
   const isMapQuestion = question.questionType === "Map";
@@ -141,13 +142,10 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
 
   return (
     <div className={styles["matching-question"]}>
-      <h3>
-        <span>{`${questionNumber}) `}</span>
-        <span>{question.title}</span>
-      </h3>
+      <QuestionTitle questionNumber={questionNumber} title={question.title} />
       {isMapQuestion && (
         <MatchingMap
-          options={question.set2.map((item, index) => {
+          options={question.set2.map((item) => {
             return {
               ...item,
               latitude: item.item.latitude,
@@ -162,9 +160,7 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
         }}
       >
         <div className={styles["matching-question__container"]}>
-          {boxes.map((box, index) => {
-            console.log("((((((", box);
-
+          {boxes.map((box) => {
             // If it's a map question, obscure the details
             // Also, make sure box title is respected
             const boxItem = { ...(box.item || {}), title: box.title };

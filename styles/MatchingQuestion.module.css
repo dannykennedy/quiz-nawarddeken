@@ -44,7 +44,8 @@
   font-style: italic;
 }
 
-.question-option__djnj {
+.question-option__djnj,
+.question-option__bininj {
   color: rgba(152, 56, 50, 1);
 }
 

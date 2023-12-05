@@ -16,14 +16,6 @@ console.log(
   process.env.NEXT_PUBLIC_NAWARDDEKEN_MAPBOX_TOKEN
 );
 
-// Options is an array of objects like this:
-// {
-// latitude:"-12.76378645",
-// longitude:"133.844517659562",
-// optionCorrect:true,
-// optionText:"Kabulwarnamyo",
-// }
-
 export const MatchingMap = ({ options }) => {
   console.log("options", options);
 
@@ -35,8 +27,6 @@ export const MatchingMap = ({ options }) => {
     width: mapDiameter,
     height: mapDiameter,
   });
-
-  console.log("styles", styles);
 
   // Get minLng, minLat, maxLng, maxLat from options
   const bounds = useMemo(() => {
@@ -57,7 +47,6 @@ export const MatchingMap = ({ options }) => {
     const initialBounds = vp.fitBounds(bounds, {
       padding: 50,
     });
-    console.log("initialBounds", initialBounds);
     return initialBounds;
   }, [bounds, vp]);
 
@@ -86,7 +75,8 @@ export const MatchingMap = ({ options }) => {
         {options &&
           options.length > 0 &&
           options.map((option, index) => {
-            const { latitude, longitude } = option;
+            const { latitude, longitude, title: optionTitle } = option;
+            console.log("option", option);
             return (
               <Marker
                 key={index}
@@ -95,7 +85,7 @@ export const MatchingMap = ({ options }) => {
                 offsetLeft={-20}
                 offsetTop={-10}
               >
-                <div className={styles["marker"]}>{indexToLetter(index)}</div>
+                <div className={styles["marker"]}>{optionTitle}</div>
               </Marker>
             );
           })}
