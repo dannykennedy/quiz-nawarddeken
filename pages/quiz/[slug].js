@@ -1,5 +1,5 @@
 import fs from "fs";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import matter from "gray-matter";
 import Head from "next/head";
 import styles from "../../styles/Quiz.module.css";
@@ -11,10 +11,47 @@ import Image from "next/image";
 import { MultipleChoiceQuestion } from "../../components/MultipleChoiceQuestion";
 
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
-  // console.log("fullQuestions", fullQuestions);
-
   // Get the number of questions in the quiz
   const numQuestions = Object.keys(fullQuestions || {}).length;
+
+  // Process the questions
+  const allQuestions = useMemo(() => {
+    // Multiple choice questions
+    const multipleChoiceQuestions = (
+      frontmatter.multipleChoiceQuestions || []
+    ).map((mcq) => {
+      return {
+        ...mcq,
+        type: "multipleChoiceQuestion",
+        id: mcq.multipleChoiceQuestion,
+        questionNumber: mcq.questionNumber || 1,
+        question: fullQuestions[mcq.multipleChoiceQuestion],
+      };
+    });
+
+    // Matching questions
+    const matchingQuestions = (frontmatter.matchingQuestions || []).map(
+      (mq) => {
+        return {
+          ...mq,
+          type: "matchingQuestion",
+          id: mq.matchingQuestion,
+          questionNumber: mq.questionNumber || 1,
+          question: fullQuestions[mq.matchingQuestion],
+        };
+      }
+    );
+
+    // Combine the questions
+    const questions = [...multipleChoiceQuestions, ...matchingQuestions];
+
+    // Sort the questions by their order
+    questions.sort((a, b) => {
+      return a.questionNumber - b.questionNumber;
+    });
+
+    return questions;
+  }, [frontmatter, fullQuestions]);
 
   // STATE
   const [answers, setAnswers] = useState({});
@@ -74,58 +111,37 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
         <p className={mainStyles["blockquote"]}>{frontmatter.description}</p>
         <main className={styles["quiz-area"]}>
           <div className="container">
-            {/* MAP QUESTIONS */}
-            {frontmatter.multipleChoiceQuestions &&
-              frontmatter.multipleChoiceQuestions.map((q, index) => {
-                const fullQuestion = fullQuestions[q.multipleChoiceQuestion];
-                //   const { question, options, name, questionType } = q
-                if (fullQuestion.questionType === "Map") {
-                  return (
-                    <div key={index}>
-                      <h3>{fullQuestion.title}</h3>
-                      <Map
-                        options={fullQuestion.options}
-                        // selectedOptionIndex={answers[name]}
-                        onSelectOption={(optionIndex) => {
-                          console.log("selected option", optionIndex);
-                        }}
-                      />
-                    </div>
-                  );
-                } else {
-                  return (
-                    <MultipleChoiceQuestion
-                      key={index}
-                      question={fullQuestion}
-                      questionNumber={index + 1}
-                      onAnswer={(answer) => {
-                        onSetAnswers({
-                          ...answers,
-                          [fullQuestion.id]: answer,
-                        });
-                      }}
-                    />
-                  );
-                }
-              })}
-            {/* MATCHING QUESTIONS */}
-            {frontmatter.matchingQuestions &&
-              frontmatter.matchingQuestions.map((q, index) => {
-                const fullQuestion = fullQuestions[q.matchingQuestion];
+            {allQuestions.map((q, index) => {
+              if (q.type === "multipleChoiceQuestion") {
                 return (
-                  <MatchingQuestion
+                  <MultipleChoiceQuestion
                     key={index}
-                    question={fullQuestion}
-                    questionNumber={index + numMCQuestions + 1}
+                    question={q.question}
+                    questionNumber={index + 1}
                     onAnswer={(answer) => {
                       onSetAnswers({
                         ...answers,
-                        [fullQuestion.id]: answer,
+                        [q.id]: answer,
                       });
                     }}
                   />
                 );
-              })}
+              } else {
+                return (
+                  <MatchingQuestion
+                    key={index}
+                    question={q.question}
+                    questionNumber={index + 1}
+                    onAnswer={(answer) => {
+                      onSetAnswers({
+                        ...answers,
+                        [q.id]: answer,
+                      });
+                    }}
+                  />
+                );
+              }
+            })}
           </div>
           {/* Submit quiz button */}
           <div className={mainStyles["button-container"]}>
