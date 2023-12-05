@@ -3,11 +3,11 @@ import styles from "../../styles/MatchingQuestion.module.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MatchingQuestionItem } from "./MatchingQuestionItem";
 import { insert, remove, reorder } from "./drag-drop-functions";
-import PlayButton from "../PlayButton";
 import mainStyles from "../../styles/Main.module.css";
 import { calculateCorrectMatches } from "./matching-functions";
 import { MatchingMap } from "../MatchingMap";
 import { ItemDetails } from "./ItemDetails";
+import { log } from "@deck.gl/core";
 
 export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
   const isMapQuestion = question.questionType === "Map";
@@ -162,72 +162,80 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
         }}
       >
         <div className={styles["matching-question__container"]}>
-          {boxes.map((box, index) => (
-            <div key={box.id} className={styles["matching-question__box"]}>
-              <div
-                style={{
-                  minHeight: 50,
-                  marginBottom: 16,
-                }}
-              >
-                <ItemDetails
-                  item={box.item || { title: box.title }}
-                  isHeader={true}
-                />
+          {boxes.map((box, index) => {
+            console.log("((((((", box);
+
+            // If it's a map question, obscure the details
+            // Also, make sure box title is respected
+            const boxItem = { ...(box.item || {}), title: box.title };
+            const displayBox = isMapQuestion
+              ? { title: box.title, id: box.id }
+              : boxItem;
+
+            return (
+              <div key={box.id} className={styles["matching-question__box"]}>
+                <div
+                  style={{
+                    minHeight: isMapQuestion ? undefined : 50,
+                    marginBottom: 16,
+                  }}
+                >
+                  <ItemDetails item={displayBox} isHeader={true} />
+                </div>
+                <Droppable
+                  droppableId={box.id}
+                  className={styles["matching-question__droppable"]}
+                >
+                  {(provided, snapshot) => {
+                    return (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        className={styles["matching-question__box__content"]}
+                        // Background image of the item
+                        // Fit the image to the box
+                        style={{
+                          backgroundImage:
+                            box.item && !isMapQuestion
+                              ? `url(../${box.item.quizItemImage})`
+                              : undefined,
+                          backgroundSize: "cover",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                      >
+                        {box.itemKeys.map((itemKey, index) => {
+                          const item = sourceItems[itemKey];
+                          return (
+                            <Draggable
+                              key={item.key}
+                              draggableId={item.key}
+                              index={index}
+                            >
+                              {(provided, snapshot) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  className={
+                                    styles[
+                                      "matching-question__box__content__item"
+                                    ]
+                                  }
+                                >
+                                  <MatchingQuestionItem item={item} />
+                                </div>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    );
+                  }}
+                </Droppable>
               </div>
-              <Droppable
-                droppableId={box.id}
-                className={styles["matching-question__droppable"]}
-              >
-                {(provided, snapshot) => {
-                  return (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className={styles["matching-question__box__content"]}
-                      // Background image of the item
-                      // Fit the image to the box
-                      style={{
-                        backgroundImage:
-                          box.item && !isMapQuestion
-                            ? `url(../${box.item.quizItemImage})`
-                            : undefined,
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                    >
-                      {box.itemKeys.map((itemKey, index) => {
-                        const item = sourceItems[itemKey];
-                        return (
-                          <Draggable
-                            key={item.key}
-                            draggableId={item.key}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                className={
-                                  styles[
-                                    "matching-question__box__content__item"
-                                  ]
-                                }
-                              >
-                                <MatchingQuestionItem item={item} />
-                              </div>
-                            )}
-                          </Draggable>
-                        );
-                      })}
-                      {provided.placeholder}
-                    </div>
-                  );
-                }}
-              </Droppable>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </DragDropContext>
       <div className={mainStyles["answers-area"]}>

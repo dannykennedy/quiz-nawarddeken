@@ -3,8 +3,6 @@ import styles from "../../styles/MatchingQuestion.module.css";
 import PlayButton from "../PlayButton";
 
 export const ItemDetails = ({ item, isHeader }) => {
-  console.log(item);
-
   const {
     title,
     quizItemAudioEnglish,

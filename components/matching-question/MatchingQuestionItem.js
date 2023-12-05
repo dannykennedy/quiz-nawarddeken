@@ -17,7 +17,7 @@ export const MatchingQuestionItem = ({ item, index }) => {
           />
         </div>
       )}
-      <ItemDetails item={item.item} />
+      <ItemDetails item={item.item || {}} />
     </div>
   );
 };
