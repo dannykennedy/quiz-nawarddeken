@@ -27,11 +27,13 @@ console.log(
 export const MatchingMap = ({ options }) => {
   console.log("options", options);
 
+  const mapDiameter = 400;
+
   const [viewport, setViewport] = useState(NT_VIEWPORT);
 
   const vp = new WebMercatorViewport({
-    width: 500,
-    height: 500,
+    width: mapDiameter,
+    height: mapDiameter,
   });
 
   console.log("styles", styles);
@@ -60,7 +62,11 @@ export const MatchingMap = ({ options }) => {
   }, [bounds, vp]);
 
   return (
-    <div className={styles["map-question-wrapper"]} width={"100%"} height={500}>
+    <div
+      className={`${styles["map-question-wrapper"]} ${styles["matching-map__map"]}`}
+      width={"100%"}
+      height={mapDiameter}
+    >
       <ReactMapGL
         {...viewport}
         // maxZoom={15}
@@ -70,7 +76,7 @@ export const MatchingMap = ({ options }) => {
         getCursor={() => {
           return "grab";
         }}
-        style={{ width: 500, height: 500 }}
+        style={{ width: mapDiameter, height: mapDiameter }}
         mapboxAccessToken={process.env.NEXT_PUBLIC_NAWARDDEKEN_MAPBOX_TOKEN}
         mapStyle={"mapbox://styles/lightgarden/clmmvlc0c01yq01rf7j5lddkb"}
         onMove={(viewport) => {
