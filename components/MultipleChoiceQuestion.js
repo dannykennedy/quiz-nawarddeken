@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styles from "../styles/MultipleChoiceQuestion.module.css";
 import mainStyles from "../styles/Main.module.css";
+import Image from "next/image";
 
 // question.options is in the form
-// [{optionText: 'Dioscorea transversa', optionCorrect: true}]
+// [{optionText: 'Dioscorea transversa', optionImage: 'x.jpg', optionCorrect: true}]
 export const MultipleChoiceQuestion = ({
   question,
   questionNumber,
@@ -17,10 +18,10 @@ export const MultipleChoiceQuestion = ({
   });
 
   return (
-    <div className={styles["matching-question"]}>
+    <div className={styles["mc-question"]}>
       <h3>{`${questionNumber}) ${question.title}`}</h3>
       {/* List with check boxes for the options */}
-      <ul className={styles["matching-question__options"]}>
+      <ul className={styles["mc-question__options"]}>
         {question.options.map((option, index) => {
           return (
             <li key={index}>
@@ -46,11 +47,22 @@ export const MultipleChoiceQuestion = ({
                 }}
               />
               <label
-                className={styles["matching-question__option-label"]}
+                className={styles["mc-question__option-label"]}
                 htmlFor={option.optionText}
               >
                 {option.optionText}
               </label>
+              {/* Image if there is one */}
+              {option.optionImage && (
+                <div className={styles["mc-question__option-image"]}>
+                  <Image
+                    src={option.optionImage}
+                    alt={option.optionText || option.optionImage}
+                    height={100}
+                    width={100}
+                  />
+                </div>
+              )}
             </li>
           );
         })}
@@ -67,7 +79,7 @@ export const MultipleChoiceQuestion = ({
         {
           // If the user has checked the answer, show the answer
           showingAnswer && (
-            <div className={styles["matching-question__answer"]}>
+            <div className={styles["mc-question__answer"]}>
               <p>{answer.message}</p>
             </div>
           )

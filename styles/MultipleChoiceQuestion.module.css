@@ -1,12 +1,17 @@
-.matching-question__options {
+.mc-question__options {
   list-style: none;
   padding-left: 0px;
 }
 
-.matching-question__option-label {
+.mc-question__option-label {
   font-size: 1.1rem;
 }
 
-.matching-question__options li {
+.mc-question__options li {
   margin-bottom: 1rem;
+}
+
+.mc-question__option-image {
+  height: 100px;
+  width: 100px;
 }
