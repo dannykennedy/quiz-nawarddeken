@@ -273,3 +273,7 @@ collections:
             searchFields: ["title"]
             valueField: "{{slug}}"
             displayFields: ["title"]
+          - label: "Question number"
+            name: "questionNumber"
+            widget: "number"
+            required: false
