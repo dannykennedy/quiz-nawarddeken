@@ -1,6 +1,6 @@
 ---
 title: Wet Season
-labelBininj: Kudjewk
+labelKunwinjku: Kudjewk
 quizItemImage: /uploads/kudjewk.jpg
-quizItemAudioKunwok: /uploads/kudjewk.mp3
+quizItemAudioKunwinjku: /uploads/kudjewk.mp3
 ---

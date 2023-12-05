@@ -26,6 +26,7 @@ const PlayButton = ({ audioTrack }) => {
     <span
       style={{
         cursor: "pointer",
+        fontStyle: "normal",
       }}
       onClick={handleButtonClick}
     >

@@ -7,6 +7,7 @@ import PlayButton from "../PlayButton";
 import mainStyles from "../../styles/Main.module.css";
 import { calculateCorrectMatches } from "./matching-functions";
 import { MatchingMap } from "../MatchingMap";
+import { ItemDetails } from "./ItemDetails";
 
 export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
   const isMapQuestion = question.questionType === "Map";
@@ -163,12 +164,16 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
         <div className={styles["matching-question__container"]}>
           {boxes.map((box, index) => (
             <div key={box.id} className={styles["matching-question__box"]}>
-              <h4>
-                {box.title}
-                {box.item && box.item.quizItemAudioKunwok && (
-                  <PlayButton audioTrack={box.item.quizItemAudioKunwok} />
-                )}
-              </h4>
+              <div
+                style={{
+                  minHeight: 50,
+                }}
+              >
+                <ItemDetails
+                  item={box.item || { title: box.title }}
+                  isHeader={true}
+                />
+              </div>
               <Droppable
                 droppableId={box.id}
                 className={styles["matching-question__droppable"]}

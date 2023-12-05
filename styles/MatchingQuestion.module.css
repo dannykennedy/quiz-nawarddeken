@@ -35,6 +35,17 @@
   margin: 0px;
   padding-left: 5px;
   font-size: 1.1rem;
+  text-align: left;
+}
+
+.question-option__w,
+.question-option__djnj,
+.question-option__bininj {
+  font-style: italic;
+}
+
+.question-option__djnj {
+  color: rgba(152, 56, 50, 1);
 }
 
 .matching-question__container {

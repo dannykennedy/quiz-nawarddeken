@@ -1,6 +1,6 @@
 ---
 title: Spear Grass
-labelBininj: Anbedje
+labelKunwinjku: Anbedje
 quizItemImage: /uploads/manbedje.jpg
-quizItemAudioKunwok: /uploads/anbedje.mp3
+quizItemAudioKunwinjku: /uploads/anbedje.mp3
 ---

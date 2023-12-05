@@ -1,6 +1,6 @@
 ---
 title: Late wet season
-labelBininj: Bangkerreng
+labelKunwinjku: Bangkerreng
 quizItemImage: /uploads/bangkerreng.jpg
-quizItemAudioKunwok: /uploads/bangkerreng.mp3
+quizItemAudioKunwinjku: /uploads/bangkerreng.mp3
 ---

@@ -159,9 +159,9 @@ collections:
             name: "set1item"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["title", "labelBininj"]
+            searchFields: ["title", "labelKunwinjku"]
             valueField: "{{slug}}"
-            displayFields: ["title", "labelBininj"]
+            displayFields: ["title", "labelKunwinjku"]
           - label: "Item label"
             name: "title"
             widget: "string"
@@ -177,9 +177,9 @@ collections:
             name: "set2item"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["title", "labelBininj"]
+            searchFields: ["title", "labelKunwinjku"]
             valueField: "{{slug}}"
-            displayFields: ["title", "labelBininj"]
+            displayFields: ["title", "labelKunwinjku"]
           - label: "Item label"
             name: "title"
             widget: "string"
@@ -195,17 +195,17 @@ collections:
             name: "match1"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["title", "labelBininj"]
+            searchFields: ["title", "labelKunwinjku"]
             valueField: "{{slug}}"
-            displayFields: ["title", "labelBininj"]
+            displayFields: ["title", "labelKunwinjku"]
             required: true
           - label: "Item 2"
             name: "match2"
             widget: "relation"
             collection: "quizItems"
-            searchFields: ["title", "labelBininj"]
+            searchFields: ["title", "labelKunwinjku"]
             valueField: "{{slug}}"
-            displayFields: ["title", "labelBininj"]
+            displayFields: ["title", "labelKunwinjku"]
             required: true
   - name: "quiz"
     label: "Quiz"

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../../styles/MatchingQuestion.module.css";
 import Image from "next/image";
 import PlayButton from "../PlayButton";
+import { ItemDetails } from "./ItemDetails";
 
 export const MatchingQuestionItem = ({ item, index }) => {
   return (
@@ -16,12 +17,7 @@ export const MatchingQuestionItem = ({ item, index }) => {
           />
         </div>
       )}
-      <p key={index} className={styles["question-option__text"]}>
-        <span>{item.title}</span>
-        {item.item && item.item.quizItemAudioKunwok && (
-          <PlayButton audioTrack={item.item.quizItemAudioKunwok} />
-        )}
-      </p>
+      <ItemDetails item={item.item} />
     </div>
   );
 };
