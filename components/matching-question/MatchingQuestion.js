@@ -160,13 +160,17 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
         }}
       >
         <div className={styles["matching-question__container"]}>
-          {boxes.map((box) => {
+          {boxes.map((box, i) => {
             // If it's a map question, obscure the details
             // Also, make sure box title is respected
             const boxItem = { ...(box.item || {}), title: box.title };
             const displayBox = isMapQuestion
               ? { title: box.title, id: box.id }
               : boxItem;
+
+            // If set2ImagesOnly is true, only show the images
+            // No itemdetails other than the first one
+            const shouldDisplayItemDetails = i < 1 || !question.set2ImagesOnly;
 
             return (
               <div key={box.id} className={styles["matching-question__box"]}>
@@ -176,8 +180,11 @@ export const MatchingQuestion = ({ question, questionNumber, onAnswer }) => {
                     marginBottom: 16,
                   }}
                 >
-                  <ItemDetails item={displayBox} isHeader={true} />
+                  {shouldDisplayItemDetails && (
+                    <ItemDetails item={displayBox} isHeader={true} />
+                  )}
                 </div>
+
                 <Droppable
                   droppableId={box.id}
                   className={styles["matching-question__droppable"]}

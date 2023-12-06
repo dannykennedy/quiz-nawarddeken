@@ -3,8 +3,6 @@ import Image from "next/image";
 import styles from "../styles/Quiz.module.css";
 
 export const QuizHeader = ({ frontmatter }) => {
-  console.log("QuizHeader", frontmatter);
-
   const { quizImage, title, labelKunwinjku, labelKundedjnjenghmi } =
     frontmatter;
 
