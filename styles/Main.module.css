@@ -55,6 +55,7 @@ ul.header-links {
   font-size: 3rem;
   margin-top: 0px;
   font-weight: 600;
+  padding-left: 3rem;
 }
 
 .blockquote {
@@ -63,6 +64,7 @@ ul.header-links {
   font-style: italic;
   font-size: 1.1rem;
   padding: 1rem 3rem;
+  margin: 0px;
 }
 
 .blockquote-source {

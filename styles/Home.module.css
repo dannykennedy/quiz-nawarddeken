@@ -11,6 +11,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 4rem;
+  padding: 0 1rem;
 }
 
 .quiz-boxes a:visited {
