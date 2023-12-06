@@ -1,5 +1,6 @@
 ---
 title: Places
+labelKundedjnjenghmi: Bolkno
 description: Guess where the places are!
 quizImage:
   quizImageSrc: /uploads/dsc01482.jpg
