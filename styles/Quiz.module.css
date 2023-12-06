@@ -17,13 +17,27 @@
 
 .quiz-title {
   position: absolute;
-  bottom: 2rem;
   left: 3rem;
   color: rgba(255, 255, 255, 1);
   margin-bottom: 0;
   font-size: 3rem;
   margin-top: 0px;
   font-weight: 600;
+}
+
+.quiz-label-language {
+  position: absolute;
+  left: 3rem;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 0;
+  font-size: 2rem;
+  margin-top: 0px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.quiz-label-language--djnj {
+  color: hsl(4, 50%, 80%);
 }
 
 .quiz-summary {

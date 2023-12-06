@@ -9,6 +9,7 @@ import { MatchingQuestion } from "../../components/matching-question/MatchingQue
 import { Header } from "../../components/Header";
 import Image from "next/image";
 import { MultipleChoiceQuestion } from "../../components/MultipleChoiceQuestion";
+import { QuizHeader } from "../../components/QuizHeader";
 
 export default function Quiz({ frontmatter, markdown, fullQuestions }) {
   // Get the number of questions in the quiz
@@ -94,19 +95,7 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
         <title>Quiz | {frontmatter.title}</title>
       </Head>
       <Header />
-      {frontmatter.quizImage && (
-        <div style={{ width: "100%", height: 400, position: "relative" }}>
-          <Image
-            src={frontmatter.quizImage.quizImageSrc}
-            alt={frontmatter.quizImage.quizImageAlt}
-            layout="fill"
-            objectFit="cover"
-          />
-          {/* Overlay with shading, darker at the bottom */}
-          <div className={styles["quiz-image-overlay"]} />
-          <h1 className={`${styles["quiz-title"]}`}>{frontmatter.title}</h1>
-        </div>
-      )}
+      <QuizHeader frontmatter={frontmatter} />
       <div className={mainStyles["content-wrapper"]}>
         <p className={mainStyles["blockquote"]}>{frontmatter.description}</p>
         <main className={styles["quiz-area"]}>

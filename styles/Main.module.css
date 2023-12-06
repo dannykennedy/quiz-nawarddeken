@@ -62,7 +62,7 @@ ul.header-links {
   font-family: "Courier New", Courier, monospace;
   font-style: italic;
   font-size: 1.1rem;
-  margin: 1rem 0px;
+  padding: 1rem 3rem;
 }
 
 .blockquote-source {
