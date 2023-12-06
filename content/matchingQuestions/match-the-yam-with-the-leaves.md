@@ -3,6 +3,7 @@ title: Match the yam with the leaves!
 questionType: Drag and Drop
 set1title: Yams
 set2title: Leaves
+set2ImagesOnly: true
 set1:
   - set1item: cheeky-yam
   - set1item: long-yam
