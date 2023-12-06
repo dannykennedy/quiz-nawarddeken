@@ -112,35 +112,43 @@ export default function Quiz({ frontmatter, markdown, fullQuestions }) {
         <main className={styles["quiz-area"]}>
           <div className="container">
             {allQuestions.map((q, index) => {
-              if (q.type === "multipleChoiceQuestion") {
-                return (
-                  <MultipleChoiceQuestion
-                    key={index}
-                    question={q.question}
-                    questionNumber={index + 1}
-                    onAnswer={(answer) => {
-                      onSetAnswers({
-                        ...answers,
-                        [q.id]: answer,
-                      });
-                    }}
-                  />
-                );
-              } else {
-                return (
-                  <MatchingQuestion
-                    key={index}
-                    question={q.question}
-                    questionNumber={index + 1}
-                    onAnswer={(answer) => {
-                      onSetAnswers({
-                        ...answers,
-                        [q.id]: answer,
-                      });
-                    }}
-                  />
-                );
-              }
+              const isEven = index % 2 === 0;
+              return (
+                <div
+                  className={`${styles["question-wrapper"]} ${
+                    isEven
+                      ? styles["question-wrapper--even"]
+                      : styles["question-wrapper--odd"]
+                  }`}
+                  key={index}
+                >
+                  {q.type === "multipleChoiceQuestion" ? (
+                    <MultipleChoiceQuestion
+                      key={index}
+                      question={q.question}
+                      questionNumber={index + 1}
+                      onAnswer={(answer) => {
+                        onSetAnswers({
+                          ...answers,
+                          [q.id]: answer,
+                        });
+                      }}
+                    />
+                  ) : (
+                    <MatchingQuestion
+                      key={index}
+                      question={q.question}
+                      questionNumber={index + 1}
+                      onAnswer={(answer) => {
+                        onSetAnswers({
+                          ...answers,
+                          [q.id]: answer,
+                        });
+                      }}
+                    />
+                  )}
+                </div>
+              );
             })}
           </div>
           {/* Submit quiz button */}

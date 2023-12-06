@@ -46,7 +46,7 @@ ul.header-links {
 
 .content-wrapper {
   box-sizing: border-box;
-  padding: 3rem 3rem;
+  padding: 3rem 0;
 }
 
 /* HEADINGS */

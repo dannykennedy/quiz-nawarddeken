@@ -31,3 +31,11 @@
   color: #983832;
   font-weight: bold;
 }
+
+.question-wrapper {
+  padding: 3rem 3rem;
+}
+
+.question-wrapper--odd {
+  background-color: hsl(4, 20%, 97%);
+}
