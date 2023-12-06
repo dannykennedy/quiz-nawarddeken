@@ -149,6 +149,10 @@ collections:
         widget: "string"
         required: false
         hint: "e.g. Seasons"
+      - label: "Use images only in set 2"
+        name: "set2ImagesOnly"
+        widget: "boolean"
+        required: false
       - label: "Set 1"
         name: "set1"
         widget: "list"
