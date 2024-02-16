@@ -9,7 +9,11 @@ const headerLinks = [
     href: "/",
   },
   {
-    label: "Nawarddeken",
+    label: "Warddeken",
+    href: "https://www.warddeken.org.au/",
+  },
+  {
+    label: "Nawarddeken Academy",
     href: "https://www.nawarddeken.org.au/",
   },
 ];
