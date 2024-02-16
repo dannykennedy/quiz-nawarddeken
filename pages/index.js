@@ -10,11 +10,11 @@ export default function Home({ quizzes }) {
   return (
     <div className={mainStyles["page-wrapper"]}>
       <Head>
-        <title>Nawarddeken Quizzes</title>
+        <title>Kuwarddewardde Malkno Quizzes</title>
       </Head>
       <Header />
       <div className={mainStyles["content-wrapper"]}>
-        <h1 className={mainStyles["h1"]}>Nawarddeken Quizzes</h1>
+        <h1 className={mainStyles["h1"]}>Kuwarddewardde Malkno Quizzes</h1>
 
         <blockquote className={mainStyles["blockquote"]}>
           <span>

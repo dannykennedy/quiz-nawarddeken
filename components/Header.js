@@ -17,7 +17,7 @@ const headerLinks = [
 export const Header = () => {
   return (
     <header className={styles["header"]}>
-      <Image src="/uploads/logo.jpg" height={150} width={172}></Image>
+      <Image src="/uploads/wlm_logo.png" height={150} width={172}></Image>
       <div className={styles["header-right"]}>
         <ul className={styles["header-links"]}>
           {headerLinks.map((link, i) => {
